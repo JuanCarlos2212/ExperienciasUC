@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/backgSliderfrag"
+    tools:context=".ui.fragment_presentacion1">
+
+
+
+
+
+    <ImageView
+
+        android:id="@+id/imamgenportada1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/portadauc"
+
+        ></ImageView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/degradado_splash"></View>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/tituloPresentacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="70dp"
+            android:layout_marginTop="200dp"
+            android:gravity="center"
+            android:layout_margin="20dp"
+            android:text="Una gran bienvenida"
+            android:textColor="@color/white"
+            android:textSize="40sp"></TextView>
+
+        <TextView
+            android:id="@+id/contenidoPresentacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:text="Conoce sobre nuestras carreras profesionales"
+            android:textColor="@color/white"
+            android:textSize="20sp"></TextView>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

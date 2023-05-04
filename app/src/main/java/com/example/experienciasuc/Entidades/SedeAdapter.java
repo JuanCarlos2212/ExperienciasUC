@@ -1,0 +1,84 @@
+package com.example.experienciasuc.Entidades;
+
+import android.content.Intent;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.experienciasuc.R;
+import com.example.experienciasuc.lista_carreras;
+
+import java.util.List;
+
+public class SedeAdapter extends RecyclerView.Adapter<SedeAdapter.CampusHolder> implements View.OnClickListener {
+
+    List<Sede> listaSede;
+
+    private View.OnClickListener listener;
+
+    @Override
+    public void onClick(View view) {
+
+    }
+
+    public SedeAdapter(List<Sede> listaCampus) {this.listaSede = listaCampus; }
+
+
+    @NonNull
+    @Override
+    public CampusHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+        View vista = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_campus_universidad,parent, false);
+        RecyclerView.LayoutParams formaLayout = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+
+
+        vista.setLayoutParams(formaLayout);
+
+        vista.setOnClickListener(this);
+
+        return new CampusHolder(vista);
+
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull CampusHolder holder, int position) {
+
+        holder.txtNombre_sede.setText(listaSede.get(position).getNombreSede());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), lista_carreras.class);
+                v.getContext().startActivity(intent);
+            }
+        });
+
+        if(listaSede.get(position).getImagen() != null)
+            holder.ImgCampus.setImageBitmap(listaSede.get(position).getImagen());
+        else
+            holder.ImgCampus.setImageResource(R.drawable.img_base);
+    }
+
+    @Override
+    public int getItemCount() {
+        return listaSede.size();
+    }
+
+    public class CampusHolder extends RecyclerView.ViewHolder {
+
+        TextView txtId_sede, txtNombre_sede;
+        ImageView ImgCampus;
+        public CampusHolder(View itemView) {
+            super(itemView);
+             txtNombre_sede= itemView.findViewById(R.id.txtNombreCampus);
+            ImgCampus = itemView.findViewById(R.id.imgImagenSede);
+
+        }
+    }
+}
