@@ -1,18 +1,22 @@
 package com.example.experienciasuc.Entidades;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.experienciasuc.MainActivity;
 import com.example.experienciasuc.R;
+import com.example.experienciasuc.ui.fragment_plan_estudios;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -50,21 +54,38 @@ public class CarrerasAdapter extends RecyclerView.Adapter<CarrerasAdapter.Carrer
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CarrerasAdapter.CarrerasHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CarrerasHolder holder, int position) {
 
-
+        String planstudios ;
+        Integer tidcarrera;
         holder.txtnombre.setText(listaCarreras.get(position).getNombre());
+        planstudios = listaCarreras.get(position).getPlan_estudios();
+        tidcarrera = listaCarreras.get(position).getIdcarrera();
 
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-//                Bundle enviardatos = new Bundle();
-//                enviardatos.putString("keyDatosidperro",holder.txtidPerro.getText().toString());
+
+                Bundle enviardatos = new Bundle();
+                enviardatos.putString("keyplanEstudios",planstudios);
 //                enviardatos.putString("keyDatosrazaperro", String.valueOf(holder.txtRaza.getText()));
                 Intent intent = new Intent(view.getContext(), MainActivity.class);
-//                intent.putExtras(enviardatos);
+
+                // Obtener la instancia de SharedPreferences
+                SharedPreferences sharedPreferences = holder.itemView.getContext().getSharedPreferences("MiPref", Context.MODE_PRIVATE);
+
+                // Obtener el editor de SharedPreferences
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                // Guardar una variable
+                editor.putString("keyplanestudios", planstudios);
+
+                // Aplicar los cambios
+                editor.apply();
+//                Toast.makeText(view.getContext(),planstudios , Toast.LENGTH_SHORT).show();
+                intent.putExtras(enviardatos);
                 view.getContext().startActivity(intent);
             }
         });
@@ -85,6 +106,7 @@ public class CarrerasAdapter extends RecyclerView.Adapter<CarrerasAdapter.Carrer
 
         TextView txtidcarrera,txtnombre, txtciclo, txtdescripciion;
         ImageView imgCarrera;
+        String planstudios,tidcarrera ;
         public CarrerasHolder(@NonNull View itemView) {
             super(itemView);
 

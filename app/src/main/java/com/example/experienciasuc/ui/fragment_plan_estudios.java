@@ -1,66 +1,89 @@
 package com.example.experienciasuc.ui;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.experienciasuc.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link fragment_plan_estudios#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class fragment_plan_estudios extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
+//    TextView txtTexto;
+    String urlPlanEstudios;
+    WebView webView;
+    String url;
     public fragment_plan_estudios() {
         // Required empty public constructor
+
+
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment fragment_plan_estudios.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static fragment_plan_estudios newInstance(String param1, String param2) {
-        fragment_plan_estudios fragment = new fragment_plan_estudios();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    public interface OnCarreraClickListener {
+        void onCarreraClick(String planEstudios);
+    }
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (outState != null) {
+            url = outState.getString("miVariable");
+        }
+
     }
 
-    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+        Bundle args = getArguments();
+//
+//            url = args.getString("keyplanEstudios");
+//            Toast.makeText(getContext(), "siiii"+url, Toast.LENGTH_SHORT).show();
+//            Log.d("MiTag", "El valor de miVariable es: " + url);
 
+
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_plan_estudios, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_plan_estudios, container, false);
+
+//        Bundle args = getArguments();
+//        if (args != null) {
+//            urlPlanEstudios = args.getString("keyplanEstudios");
+//        } else {
+//            Toast.makeText(getContext(), "fallo", Toast.LENGTH_SHORT).show();
+//        }
+
+//        textView = view.findViewById(R.id.plan_estudios);
+//        textView.setText(urlPlanEstudios);
+
+//        txtTexto = (TextView) view.findViewById(R.id.pruebafragment_plan_estudios);
+//        txtTexto.setText(url);
+//        Toast.makeText(getContext(), url, Toast.LENGTH_SHORT).show();
+
+//        txtTexto = (TextView) view.findViewById(R.id.pruebafragment_plan_estudios);
+        webView = (WebView) view.findViewById(R.id.wvplandeestudiospdf);
+        SharedPreferences sharedPreferences = requireContext().getSharedPreferences("MiPref", getContext().MODE_PRIVATE);
+        String planestudios = sharedPreferences.getString("keyplanestudios", "no esta agarrando");
+
+// Habilitar JavaScript si es necesario
+        WebSettings webSettings = webView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        String googleDocsUrl = "https://drive.google.com/viewerng/viewer?embedded=true&url=";
+//        Ten en cuenta que la URL se carga usando el visor de Google Drive, que es una forma común de cargar archivos PDF en un WebView.
+        webView.loadUrl(googleDocsUrl + planestudios);
+
+//        txtTexto.setText(planestudios);
+
+        return view;
     }
+
 }

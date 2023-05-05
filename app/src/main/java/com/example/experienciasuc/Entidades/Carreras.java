@@ -11,23 +11,26 @@ public class Carreras {
     private Bitmap imagen;
     private Integer numeroCiclos;
 
+    private String plan_estudios;
+
     public Carreras() {
     }
 
-    public Carreras(Integer idcarrera, String nombre, String descripcion, Bitmap imagen, Integer numeroCiclos) {
+    public Carreras(Integer idcarrera, String nombre, String descripcion, Bitmap imagen, Integer numeroCiclos, String plan_estudios) {
         this.idcarrera = idcarrera;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.imagen = imagen;
         this.numeroCiclos = numeroCiclos;
+        this.plan_estudios = plan_estudios;
     }
 
     public Integer getIdcarrera() {
         return idcarrera;
     }
 
-    public void setIdcarrera(Integer idperro) {
-        this.idcarrera = idperro;
+    public void setIdcarrera(Integer idcarrera) {
+        this.idcarrera = idcarrera;
     }
 
     public String getNombre() {
@@ -61,7 +64,16 @@ public class Carreras {
     public void setNumeroCiclos(Integer numeroCiclos) {
         this.numeroCiclos = numeroCiclos;
     }
-//    public void setDataImagen(String data){
+
+    public String getPlan_estudios() {
+        return plan_estudios;
+    }
+
+    public void setPlan_estudios(String plan_estudios) {
+        this.plan_estudios = plan_estudios;
+    }
+
+    //    public void setDataImagen(String data){
 //        try{
 //            byte[] bytecode = Base64.decode(data,Base64.DEFAULT);
 //            this.imagen = BitmapFactory.decodeByteArray(bytecode,0,bytecode.length);
@@ -89,6 +101,7 @@ public class Carreras {
 
 
     }
+
     @Override
     public String toString() {
         return "Carreras{" +
@@ -97,6 +110,7 @@ public class Carreras {
                 ", descripcion='" + descripcion + '\'' +
                 ", imagen=" + imagen +
                 ", numeroCiclos=" + numeroCiclos +
+                ", plan_estudios='" + plan_estudios + '\'' +
                 '}';
     }
 }
