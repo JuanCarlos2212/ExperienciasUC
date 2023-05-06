@@ -8,6 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.airbnb.lottie.LottieAnimationView;
+import com.airbnb.lottie.LottieComposition;
+import com.airbnb.lottie.LottieCompositionFactory;
 import com.example.experienciasuc.R;
 
 /**
@@ -25,7 +28,6 @@ public class fragment_presentacion1 extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
     public fragment_presentacion1() {
         // Required empty public constructor
     }
@@ -60,7 +62,20 @@ public class fragment_presentacion1 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_presentacion1, container, false);
+        View view = inflater.inflate(R.layout.fragment_presentacion1, container, false);
+
+        LottieAnimationView animationView = view.findViewById(R.id.animationView);
+        animationView.setVisibility(View.INVISIBLE);
+        animationView.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                animationView.playAnimation();
+                animationView.setVisibility(View.VISIBLE);;
+            }
+        }, 2500); // Retraso de 3000 milisegundos (3 segundos)
+
+
+        return view;
     }
+
 }
