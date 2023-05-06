@@ -55,8 +55,8 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        Bundle recibedato = getIntent().getExtras();
-        String url = recibedato.getString("keyplanEstudios");
+//        Bundle recibedato = getIntent().getExtras();
+//        String url = recibedato.getString("keyplanEstudios");
 //        Toast.makeText(this, url, Toast.LENGTH_SHORT).show();
 //        fragment_plan_estudios fragment = new fragment_plan_estudios();
 //        Bundle args = new Bundle();

@@ -68,24 +68,19 @@ public class CarrerasAdapter extends RecyclerView.Adapter<CarrerasAdapter.Carrer
             public void onClick(View view) {
 
 
-                Bundle enviardatos = new Bundle();
-                enviardatos.putString("keyplanEstudios",planstudios);
+//                Bundle enviardatos = new Bundle();
+//                enviardatos.putString("keyplanEstudios",planstudios);
 //                enviardatos.putString("keyDatosrazaperro", String.valueOf(holder.txtRaza.getText()));
                 Intent intent = new Intent(view.getContext(), MainActivity.class);
-
                 // Obtener la instancia de SharedPreferences
                 SharedPreferences sharedPreferences = holder.itemView.getContext().getSharedPreferences("MiPref", Context.MODE_PRIVATE);
-
                 // Obtener el editor de SharedPreferences
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-
                 // Guardar una variable
                 editor.putString("keyplanestudios", planstudios);
-
                 // Aplicar los cambios
                 editor.apply();
-//                Toast.makeText(view.getContext(),planstudios , Toast.LENGTH_SHORT).show();
-                intent.putExtras(enviardatos);
+//                intent.putExtras(enviardatos);
                 view.getContext().startActivity(intent);
             }
         });
