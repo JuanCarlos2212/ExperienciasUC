@@ -3,29 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@+id/nav_inicio">
 
     <fragment
-        android:id="@+id/nav_home"
-        android:name="com.example.experienciasuc.ui.home.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/nav_inicio"
+        android:name="com.example.experienciasuc.ui.fragment_inicio"
+        tools:layout="@layout/fragment_inicio" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.example.experienciasuc.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
-
-    <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.example.experienciasuc.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
-
-    <fragment
-        android:id="@+id/nav_plan_estudios"
+        android:id="@+id/nav_plan"
         android:name="com.example.experienciasuc.ui.fragment_plan_estudios"
-        android:label="Plan de Estudios"
         tools:layout="@layout/fragment_plan_estudios" />
+
+    <fragment
+        android:id="@+id/nav_informacion"
+        android:name="com.example.experienciasuc.ui.fragment_informacion_general"
+        tools:layout="@layout/fragment_informacion_general" />
+
+    <fragment
+        android:id="@+id/nav_eventos"
+        android:name="com.example.experienciasuc.ui.fragment_proximos_eventos"
+        tools:layout="@layout/fragment_proximos_eventos" />
+    <fragment
+        android:id="@+id/nav_contactanos"
+        android:name="com.example.experienciasuc.ui.fragment_contactanos"
+        tools:layout="@layout/fragment_contactanos" />
 </navigation>
