@@ -8,24 +8,19 @@
     <fragment
         android:id="@+id/nav_inicio"
         android:name="com.example.experienciasuc.ui.fragment_inicio"
-        tools:layout="@layout/fragment_inicio" />
+        tools:layout="@layout/fragment_inicio"
+        android:label="Ciclos"/>
 
     <fragment
         android:id="@+id/nav_plan"
         android:name="com.example.experienciasuc.ui.fragment_plan_estudios"
-        tools:layout="@layout/fragment_plan_estudios" />
+        tools:layout="@layout/fragment_plan_estudios"
+        android:label="Plan de Estudios"/>
 
-    <fragment
-        android:id="@+id/nav_informacion"
-        android:name="com.example.experienciasuc.ui.fragment_informacion_general"
-        tools:layout="@layout/fragment_informacion_general" />
 
-    <fragment
-        android:id="@+id/nav_eventos"
-        android:name="com.example.experienciasuc.ui.fragment_proximos_eventos"
-        tools:layout="@layout/fragment_proximos_eventos" />
     <fragment
         android:id="@+id/nav_contactanos"
         android:name="com.example.experienciasuc.ui.fragment_contactanos"
-        tools:layout="@layout/fragment_contactanos" />
+        tools:layout="@layout/fragment_contactanos"
+        android:label="Contactanos"/>
 </navigation>
