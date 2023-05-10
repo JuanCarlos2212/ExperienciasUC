@@ -203,6 +203,8 @@ public class fragment_lista_ciclos extends Fragment {
                         ciclos.setDataImagen(jsonObject.getString("Imagen"));
                         ciclos.setDescripcion(jsonObject.getString("Tag"));
 
+
+
                         lista_Ciclos.add(ciclos);
 
                     }
