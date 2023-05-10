@@ -7,4 +7,14 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="uno">#0054FF</color>
+    <color name="dos">#6802C0</color>
+    <color name="tres">#AB048F</color>
+    <color name="cuatro">#E90303</color>
+    <color name="cinco">#FE521D</color>
+    <color name="seis">#B07DF3</color>
+    <color name="siete">#EC76F3</color>
+    <color name="ocho">#F87373</color>
+    <color name="nueve">#FE8673</color>
+    <color name="dies">#63FCCA</color>
 </resources>
