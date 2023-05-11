@@ -3,6 +3,7 @@ package com.example.experienciasuc.ui;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.appcompat.widget.ButtonBarLayout;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.experienciasuc.R;
 import com.example.experienciasuc.lista_carreras;
 import com.example.experienciasuc.lista_campus;
@@ -75,6 +77,17 @@ public class fragment_presentacion2 extends Fragment {
                 startActivity(i);
             }
         });
+        LottieAnimationView animationView = vista.findViewById(R.id.animationView2);
+        animationView.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                animationView.playAnimation();
+                animationView.setVisibility(View.VISIBLE);;
+                btnsiguiente.setVisibility(View.VISIBLE);
+            }
+        }, 8000); // Retraso de 3000 milisegundos (3 segundos)
+
+
         return vista;
     }
 }

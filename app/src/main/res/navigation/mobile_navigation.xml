@@ -3,29 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_inicio">
+    app:startDestination="@+id/nav_home">
 
     <fragment
-        android:id="@+id/nav_inicio"
-        android:name="com.example.experienciasuc.ui.fragment_inicio"
-        tools:layout="@layout/fragment_inicio" />
+        android:id="@+id/nav_home"
+        android:name="com.example.experienciasuc.ui.fragment_lista_ciclos"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_lista_ciclos" />
+
 
     <fragment
         android:id="@+id/nav_plan"
         android:name="com.example.experienciasuc.ui.fragment_plan_estudios"
-        tools:layout="@layout/fragment_plan_estudios" />
+        tools:layout="@layout/fragment_plan_estudios"
+        android:label="Plan de Estudios"/>
 
-    <fragment
-        android:id="@+id/nav_informacion"
-        android:name="com.example.experienciasuc.ui.fragment_informacion_general"
-        tools:layout="@layout/fragment_informacion_general" />
 
-    <fragment
-        android:id="@+id/nav_eventos"
-        android:name="com.example.experienciasuc.ui.fragment_proximos_eventos"
-        tools:layout="@layout/fragment_proximos_eventos" />
     <fragment
         android:id="@+id/nav_contactanos"
         android:name="com.example.experienciasuc.ui.fragment_contactanos"
-        tools:layout="@layout/fragment_contactanos" />
+        tools:layout="@layout/fragment_contactanos"
+        android:label="Contactanos"/>
 </navigation>

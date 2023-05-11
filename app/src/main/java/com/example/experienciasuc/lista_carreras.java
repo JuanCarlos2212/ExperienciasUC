@@ -73,75 +73,77 @@ public class lista_carreras extends AppCompatActivity implements Response.Listen
         progreso = new ProgressDialog(this);
         progreso.setMessage("Buscando Carreras");
         progreso.show();
-        String url = "http://192.168.0.21/ExperienciasUC/ConsutlarListaCarreras_copia.php" ;
-//        String url = Utilidades.RUTA + "listarCarreras" ;
-        jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, this, this);
-        requestQueue.add(jsonObjectRequest);
+//        String url = "http://192.168.0.21/ExperienciasUC/ConsutlarListaCarreras_copia.php" ;
+        String url = Utilidades.RUTA + "listarCarreras" ;
+//        jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, this, this);
+//        requestQueue.add(jsonObjectRequest);
 
-//        jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
-//            @Override
-//            public void onResponse(JSONArray response) {
-//                Carreras carreras = null;
-//                progreso.hide();
-//
-//                try {
-//                    for(int i=0; i<response.length();i++){
-//                        carreras = new Carreras();
-//
-//                        JSONObject jsonObject = null;
-//                        jsonObject = response.getJSONObject(i);
-//
-//                        carreras.setNombre(jsonObject.getString("Nombre"));
-//                        carreras.setDataImagen(jsonObject.getString("Imagen"));
-//
-//                        listaCarreras.add(carreras);
-//                    }
-//                    CarrerasAdapter adapter = new CarrerasAdapter(listaCarreras);
-//                    recyclerCarreras.setAdapter(adapter);
-//
-//                } catch (Exception e){
-//                    e.printStackTrace();
-//                }
-//
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                Log.i("error en Volleyxx",error.toString());
-//            }
-//        });
-//        requestQueue.add(jsonArrayRequest);
+        jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                Carreras carreras = null;
+                progreso.hide();
+
+                try {
+                    for(int i=0; i<response.length();i++){
+                        carreras = new Carreras();
+
+                        JSONObject jsonObject = null;
+                        jsonObject = response.getJSONObject(i);
+
+                        carreras.setIdcarrera(jsonObject.getInt("Id"));
+                        carreras.setNombre(jsonObject.getString("Nombre"));
+                        carreras.setDataImagen(jsonObject.getString("Imagen"));
+                        carreras.setPlan_estudios(jsonObject.getString("PlanEstudios"));
+
+                        listaCarreras.add(carreras);
+                    }
+                    CarrerasAdapter adapter = new CarrerasAdapter(listaCarreras);
+                    recyclerCarreras.setAdapter(adapter);
+
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.i("error en Volleyxx",error.toString());
+            }
+        });
+        requestQueue.add(jsonArrayRequest);
     }
 
     @Override
     public void onResponse(JSONObject response) {
-        Carreras carreras = null;
-        progreso.hide();
-        JSONArray json = response.optJSONArray("carrera");
-
-        try {
-            for(int i=0; i<json.length();i++){
-                carreras = new Carreras();
-
-                JSONObject jsonObject = null;
-                jsonObject = json.getJSONObject(i);
-
-                carreras.setIdcarrera(jsonObject.getInt("id_carrera"));
-                carreras.setNombre(jsonObject.getString("nombre_carrera"));
-                carreras.setPlan_estudios(jsonObject.getString("plan_estudios_carrera"));
-                carreras.setDataImagen(jsonObject.getString("blob_carrera"));
-
-
-                listaCarreras.add(carreras);
-            }
-            CarrerasAdapter adapter = new CarrerasAdapter(listaCarreras);
-            recyclerCarreras.setAdapter(adapter);
-
-        }catch (Exception e){ e.printStackTrace();}
+//        Carreras carreras = null;
+//        progreso.hide();
+//        JSONArray json = response.optJSONArray("carrera");
+//
+//        try {
+//            for(int i=0; i<json.length();i++){
+//                carreras = new Carreras();
+//
+//                JSONObject jsonObject = null;
+//                jsonObject = json.getJSONObject(i);
+//
+//                carreras.setIdcarrera(jsonObject.getInt("id_carrera"));
+//                carreras.setNombre(jsonObject.getString("nombre_carrera"));
+//                carreras.setPlan_estudios(jsonObject.getString("plan_estudios_carrera"));
+//                carreras.setDataImagen(jsonObject.getString("blob_carrera"));
+//
+//
+//                listaCarreras.add(carreras);
+//            }
+//            CarrerasAdapter adapter = new CarrerasAdapter(listaCarreras);
+//            recyclerCarreras.setAdapter(adapter);
+//
+//        }catch (Exception e){ e.printStackTrace();}
     }
 
     @Override
     public void onErrorResponse(VolleyError error) {
-        Log.i("error en Volley",error.toString());
+//        Log.i("error en Volley",error.toString());
     }
 }
