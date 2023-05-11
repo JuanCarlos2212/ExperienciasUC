@@ -91,8 +91,10 @@ public class lista_carreras extends AppCompatActivity implements Response.Listen
                         JSONObject jsonObject = null;
                         jsonObject = response.getJSONObject(i);
 
+                        carreras.setIdcarrera(jsonObject.getInt("Id"));
                         carreras.setNombre(jsonObject.getString("Nombre"));
                         carreras.setDataImagen(jsonObject.getString("Imagen"));
+                        carreras.setPlan_estudios(jsonObject.getString("PlanEstudios"));
 
                         listaCarreras.add(carreras);
                     }
