@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@color/gris">
+    >
 
 
     <TextView
@@ -19,9 +19,12 @@
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:progress="10"
+        android:progress="60"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:progressTint="@color/teal_200"
+        android:max="80"
+        android:progressDrawable="@drawable/progressbar_custom"
+
         />
+
 </LinearLayout>

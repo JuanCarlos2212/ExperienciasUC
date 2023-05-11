@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.example.experienciasuc.ui.home.HomeFragment"
+        android:name="com.example.experienciasuc.ui.fragment_lista_ciclos"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_lista_ciclos" />
 
     <fragment
         android:id="@+id/nav_gallery"

@@ -21,34 +21,36 @@
             android:textSize="18dp"
             android:textColor="@color/black"
             android:textAlignment="center"
-            android:text="@string/carrera"
+            android:text="Ingenieria de Sistemas"
             android:textStyle="bold"
             android:layout_marginTop="30dp"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerCiclos"
             android:layout_width="match_parent"
-            android:layout_height="220dp"
+            android:layout_height="281dp"
             android:layout_margin="20dp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerBarraProgreso"
             android:layout_width="match_parent"
             android:layout_height="167dp"
-            android:layout_margin="10dp" />
+            android:layout_margin="10dp"
+            android:background="#92808080"/>
 
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="234dp"
+            android:layout_height="wrap_content"
 
             android:orientation="vertical"
-            android:background="@drawable/degrado1">
+            android:layout_marginTop="15dp"
+            >
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:text="Inicia tu carrera universitaria..."></TextView>
@@ -61,64 +63,12 @@
 
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-
-                android:progressTint="@color/teal_200"
+                android:layout_marginBottom="10dp"
+                android:max="80"
+                android:progressDrawable="@drawable/progressbar_custom"
 
                 />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:text="Inicia tu carrera universitaria..."></TextView>
-            <ProgressBar
-                android:id="@+id/progressBar2"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:progress="1"
-
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-
-                android:progressTint="@color/teal_200"/>
-
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:text="Inicia tu carrera universitaria..."></TextView>
-            <ProgressBar
-                android:id="@+id/progressBar3"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:progress="6"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:progressTint="@color/teal_200"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:text="Inicia tu carrera universitaria..."></TextView>
-            <ProgressBar
-                android:id="@+id/progressBar4"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:progress="2"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:progressTint="@color/teal_200"/>
 
         </LinearLayout>
 
