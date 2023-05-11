@@ -35,7 +35,7 @@
             android:id="@+id/recyclerBarraProgreso"
             android:layout_width="match_parent"
             android:layout_height="167dp"
-            android:layout_margin="10dp"
+            android:layout_margin="15dp"
             android:background="#92808080"/>
 
 
