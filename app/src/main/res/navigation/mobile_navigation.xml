@@ -11,21 +11,17 @@
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_lista_ciclos" />
 
-    <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.example.experienciasuc.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.example.experienciasuc.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
-
-    <fragment
-        android:id="@+id/nav_plan_estudios"
+        android:id="@+id/nav_plan"
         android:name="com.example.experienciasuc.ui.fragment_plan_estudios"
-        android:label="Plan de Estudios"
-        tools:layout="@layout/fragment_plan_estudios" />
+        tools:layout="@layout/fragment_plan_estudios"
+        android:label="Plan de Estudios"/>
+
+
+    <fragment
+        android:id="@+id/nav_contactanos"
+        android:name="com.example.experienciasuc.ui.fragment_contactanos"
+        tools:layout="@layout/fragment_contactanos"
+        android:label="Contactanos"/>
 </navigation>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.fragment_presentacion2">
-
 
 
     <ImageView
@@ -13,21 +13,62 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:src="@drawable/portada2"
+        android:src="@drawable/portada_uc_2"
 
-        ></ImageView>
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp"></ImageView>
 
-    <Button
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@drawable/degradado_splash"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp"></View>
+
+    <TextView
+        android:layout_width="350dp"
+        android:layout_height="100dp"
+        android:gravity="center"
+        android:text="A continuacion se presentaran nuestras sedes, elige alguna y vive la experiencia UC"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="italic|bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.949" />
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnSiguiente"
-        android:text="siguiente"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="100dp"
-        android:background="@drawable/fondo_imagen_degradado"
-
-
+        android:layout_width="70dp"
+        android:layout_height="80dp"
+        android:backgroundTint="#75385A9E"
+        android:contentDescription="Botón para pasar a la siguiente página"
+        android:textColor="@color/black"
+        app:cornerRadius="100dp"
+        app:icon="@drawable/ic_boton_presentacion"
+        app:iconSize="40dp"
+        android:visibility="invisible"
+        app:layout_constraintTop_toTopOf="@+id/imamgenPortada2"
+        app:layout_constraintBottom_toBottomOf="@+id/imamgenPortada2"
+        app:layout_constraintStart_toStartOf="@+id/imamgenPortada2"
+        app:layout_constraintEnd_toEndOf="@+id/imamgenPortada2"
         />
 
-</FrameLayout>
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animationView2"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:visibility="invisible"
+        app:layout_constraintTop_toTopOf="@+id/imamgenPortada2"
+        app:layout_constraintBottom_toBottomOf="@+id/imamgenPortada2"
+        app:layout_constraintStart_toStartOf="@+id/imamgenPortada2"
+        app:layout_constraintEnd_toEndOf="@+id/imamgenPortada2"
+
+        app:lottie_rawRes="@raw/scan_pulse"
+        app:lottie_repeatCount="2"
+        app:lottie_speed="0.5" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
