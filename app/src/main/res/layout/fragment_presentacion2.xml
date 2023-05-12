@@ -44,13 +44,12 @@
         android:id="@+id/btnSiguiente"
         android:layout_width="70dp"
         android:layout_height="80dp"
-        android:backgroundTint="#75385A9E"
+        android:backgroundTint="@color/purple_700"
         android:contentDescription="Botón para pasar a la siguiente página"
         android:textColor="@color/black"
         app:cornerRadius="100dp"
         app:icon="@drawable/ic_boton_presentacion"
         app:iconSize="40dp"
-        android:visibility="invisible"
         app:layout_constraintTop_toTopOf="@+id/imamgenPortada2"
         app:layout_constraintBottom_toBottomOf="@+id/imamgenPortada2"
         app:layout_constraintStart_toStartOf="@+id/imamgenPortada2"
@@ -61,14 +60,13 @@
         android:id="@+id/animationView2"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        android:visibility="invisible"
         app:layout_constraintTop_toTopOf="@+id/imamgenPortada2"
         app:layout_constraintBottom_toBottomOf="@+id/imamgenPortada2"
         app:layout_constraintStart_toStartOf="@+id/imamgenPortada2"
         app:layout_constraintEnd_toEndOf="@+id/imamgenPortada2"
-
         app:lottie_rawRes="@raw/scan_pulse"
-        app:lottie_repeatCount="2"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
         app:lottie_speed="0.5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
