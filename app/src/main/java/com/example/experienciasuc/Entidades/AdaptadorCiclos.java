@@ -1,15 +1,19 @@
 package com.example.experienciasuc.Entidades;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.experienciasuc.MainActivity;
 import com.example.experienciasuc.R;
+import com.example.experienciasuc.experiencias_ciclo;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -90,12 +94,23 @@ String descripcion=modelo.get(position).getDescripcion();
     public void onBindViewHolder(@NonNull @NotNull CiclosHolder holder, int position) {
         // holder.txtId.setText(lista_ciclos.get(position).getId_ciclo());
 
+        holder.imgCiclos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), experiencias_ciclo.class);
+                v.getContext().startActivity(intent);
+            }
+        });
         if (lista_ciclos.get(position).getImagen_ciclo() != null)
             holder.imgCiclos.setImageBitmap(lista_ciclos.get(position).getImagen_ciclo());
         else
             holder.imgCiclos.setImageResource(R.drawable.img_base);
         holder.txtDesc.setText(lista_ciclos.get(position).getDescripcion());
+
+
     }
+
+
     @Override
     public int getItemCount() {
         return lista_ciclos.size();
