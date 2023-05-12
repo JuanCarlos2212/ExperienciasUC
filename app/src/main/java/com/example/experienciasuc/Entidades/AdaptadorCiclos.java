@@ -89,7 +89,12 @@ String descripcion=modelo.get(position).getDescripcion();
     @Override
     public void onBindViewHolder(@NonNull @NotNull CiclosHolder holder, int position) {
         // holder.txtId.setText(lista_ciclos.get(position).getId_ciclo());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
         if (lista_ciclos.get(position).getImagen_ciclo() != null)
             holder.imgCiclos.setImageBitmap(lista_ciclos.get(position).getImagen_ciclo());
         else

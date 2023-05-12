@@ -9,8 +9,8 @@
     >
 
     <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_width="225dp"
+        android:layout_height="150dp"
         app:layout_constraintBottom_toTopOf="@+id/imgImagenFondo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,8 +40,10 @@
                 android:id="@+id/fondo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/cuatro"
-                android:gravity="center">
+                android:background="@color/uno"
+                android:gravity="center"
+                tools:layout_editor_absoluteX="-49dp"
+                tools:layout_editor_absoluteY="0dp">
 
                 <ImageView
                     android:id="@+id/imgImagenIcono"

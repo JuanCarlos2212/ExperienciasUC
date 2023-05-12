@@ -12,7 +12,8 @@
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_gravity="right"
-        android:src="@drawable/ic_regresar" />
+        android:src="@drawable/ic_regresar"
+        android:layout_margin="5dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,9 +24,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:layout_margin="25dp"
+            android:layout_margin="15dp"
             android:textSize="18sp"
-            android:gravity="center" />
+            android:gravity="center"
+            android:text="Ingenieria de Sistemas e Informatica"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            />
 
 
     </LinearLayout>
