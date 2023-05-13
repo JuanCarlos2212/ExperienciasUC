@@ -120,14 +120,14 @@ public class fragment_lista_ciclos extends Fragment {
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
 
-                // Calcula el porcentaje de la lista que se ha desplazado
+                // Calculamos el porcentaje de la lista que se ha desplazado que en este caso es la "lista de ciclos"
                 LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
                 int visibleItemCount = layoutManager.getChildCount();
                 int totalItemCount = layoutManager.getItemCount();
                 int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
                 int percentage = (int) (((float) (firstVisibleItemPosition + visibleItemCount) / totalItemCount) * 100);
 
-                // Actualiza el progreso de cada ProgressBar en el RecyclerView "recycleBarraProgreso"
+                // Actualizamos el progreso de cada ProgressBar en el RecyclerView "recycleBarraProgreso"
                 for (int i = 0; i < recycleBarraProgreso.getChildCount(); i++) {
                     View itemView = recycleBarraProgreso.getChildAt(i);
                     ProgressBar progressBar = itemView.findViewById(R.id.pbListaCiclos);
