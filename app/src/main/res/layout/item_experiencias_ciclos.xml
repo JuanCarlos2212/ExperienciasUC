@@ -9,14 +9,14 @@
     >
 
     <androidx.cardview.widget.CardView
-        android:layout_width="225dp"
-        android:layout_height="150dp"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
         app:layout_constraintBottom_toTopOf="@+id/imgImagenFondo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:cardElevation="15dp"
-        android:layout_margin="10dp"
+        android:layout_margin="5dp"
         app:cardCornerRadius="50dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -29,7 +29,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -42,24 +42,41 @@
                 android:layout_height="match_parent"
                 android:background="@color/uno"
                 android:gravity="center"
+                android:orientation="vertical"
                 tools:layout_editor_absoluteX="-49dp"
                 tools:layout_editor_absoluteY="0dp">
 
                 <ImageView
                     android:id="@+id/imgImagenIcono"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:layout_gravity="center"
-                    android:foregroundGravity="center"
+                    android:foregroundGravity="left"
                     android:src="@mipmap/ic_launcher"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:shapeAppearanceOverlay="@style/roundImageView">
+                    app:shapeAppearanceOverlay="@style/roundImageView"
+                    android:layout_margin="10dp">
+
 
                 </ImageView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="Nombre de Experiencia"
+                    android:background="@drawable/fondo_imagen_degradado"
+                    android:textColor="@color/white"
+                    >
+
+                </TextView>
+
             </LinearLayout>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

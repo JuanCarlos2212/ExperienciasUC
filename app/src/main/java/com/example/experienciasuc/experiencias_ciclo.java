@@ -3,9 +3,13 @@ package com.example.experienciasuc;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.TypedValue;
+import android.view.Display;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -43,7 +47,9 @@ public class experiencias_ciclo extends AppCompatActivity implements Response.Li
 
     JsonObjectRequest jsonObjectRequest;
 
-    public experiencias_ciclo(){
+    private RecyclerView.LayoutManager mLayoutMager;
+
+    public experiencias_ciclo() {
 
     }
 
@@ -59,8 +65,31 @@ public class experiencias_ciclo extends AppCompatActivity implements Response.Li
 
         requestQueue = Volley.newRequestQueue(this);
 
+        mLayoutMager = new GridLayoutManager(this, getSpanCount());
+        recyclerExperiencia.setLayoutManager(mLayoutMager);
+
         SubirListaBotones();
     }
+
+    private int getSpanCount() {
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+
+        int anchuraPantalla = metrics.widthPixels;
+
+        float anchuraMinimaElemento = TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                150,
+                metrics
+        );
+        return (int)(anchuraPantalla / anchuraMinimaElemento);
+    }
+
+
+
+
+
+
 
     private void SubirListaBotones(){
         progreso =new ProgressDialog(this);
