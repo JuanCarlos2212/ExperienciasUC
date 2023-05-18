@@ -27,7 +27,7 @@
             android:textColor="@color/white"
             android:textStyle="bold"
             android:gravity="left|center_vertical"
-            android:textSize="11sp"
+            android:textSize="15sp"
             android:layout_marginLeft="10dp"/>
 
     </FrameLayout>

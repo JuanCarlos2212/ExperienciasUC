@@ -14,8 +14,6 @@
 
         <!-- TODO: Update blank fragment layout -->
 
-
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -36,8 +34,12 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerBarraProgreso"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:foregroundGravity="bottom"/>
+            android:layout_height="167dp"
+            android:layout_margin="15dp"
+            android:background="#92808080"/>
+
+
+
 
 
 <!--        <FrameLayout-->
