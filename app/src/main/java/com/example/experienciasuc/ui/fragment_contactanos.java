@@ -1,66 +1,82 @@
 package com.example.experienciasuc.ui;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.example.experienciasuc.ContactoFormulario;
 import com.example.experienciasuc.R;
+import android.content.pm.PackageManager;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link fragment_contactanos#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class fragment_contactanos extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
+    CardView cardWhatsapp, cardReunion, cardFormulario;
     public fragment_contactanos() {
         // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment fragment_contactanos.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static fragment_contactanos newInstance(String param1, String param2) {
-        fragment_contactanos fragment = new fragment_contactanos();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_contactanos, container, false);
+        View vista = inflater.inflate(R.layout.fragment_contactanos, container, false);
+
+        cardWhatsapp = (CardView) vista.findViewById(R.id.cardWhatsapp);
+        cardReunion = (CardView) vista.findViewById(R.id.cardReunion);
+        cardFormulario = (CardView) vista.findViewById(R.id.cardFormulario);
+
+        cardWhatsapp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                abrirWhatsAppChat();
+            }
+        });
+        cardReunion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "Muy pronto estará disponible", Toast.LENGTH_SHORT).show();
+            }
+        });
+        cardFormulario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent  intent = new Intent(getContext(), ContactoFormulario.class);
+                startActivity(intent);
+            }
+        });
+        return vista;
     }
+    private void abrirWhatsAppChat() {
+
+        String numeroEnviarMensaje = "939264247";
+        String mensaje = "*¡Hola!*Estoy interesado en una de las carreras que conoci a travez del aplicativo *Experiencias UC :D*";
+        Uri uri = Uri.parse("https://api.whatsapp.com/send?phone=" + numeroEnviarMensaje+ "&text=" + Uri.encode(mensaje));
+
+        // Creamos el Intent con la acción "ACTION_VIEW" y el URI de WhatsApp
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(intent);
+
+        // Verificando si WhatsApp está instalado en el dispositivo, me da un pequeño error
+//        if (intent.resolveActivity(getActivity().getPackageManager()) == null) {
+//
+//        } else {
+//            Toast.makeText(getContext(), "Instale WhatsApp en este dispositivo", Toast.LENGTH_LONG).show();
+//        }
+    }
+
 }
