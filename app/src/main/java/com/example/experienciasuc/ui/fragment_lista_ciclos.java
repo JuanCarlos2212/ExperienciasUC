@@ -26,6 +26,7 @@ import com.example.experienciasuc.Entidades.CiclosGreen;
 import com.example.experienciasuc.R;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -88,7 +89,7 @@ public class fragment_lista_ciclos extends Fragment {
         recycleBarraProgreso.setHasFixedSize(true);
 
 
-        progressBar = vista.findViewById(R.id.progressBar6);
+//        progressBar = vista.findViewById(R.id.progressBar6);
 
 
 
@@ -98,78 +99,83 @@ public class fragment_lista_ciclos extends Fragment {
 
 
 
+//        recycleCiclos.addOnScrollListener(new RecyclerView.OnScrollListener() {
+//            @Override
+//            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+//                super.onScrolled(recyclerView, dx, dy);
+//
+//                // Calculate the percentage of the list that has been scrolled
+//                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+//                int visibleItemCount = layoutManager.getChildCount();
+//                int totalItemCount = layoutManager.getItemCount();
+//                int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
+//                int percentage = (int) (((float) (firstVisibleItemPosition + visibleItemCount) / totalItemCount) * 100);
+//
+//                // Update the progress bar with the percentage
+//                progressBar.setProgress(percentage);
+//            }
+//        });
         recycleCiclos.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
 
-                // Calculate the percentage of the list that has been scrolled
+                // Calculamos el porcentaje de la lista que se ha desplazado que en este caso es la "lista de ciclos"
                 LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
                 int visibleItemCount = layoutManager.getChildCount();
                 int totalItemCount = layoutManager.getItemCount();
                 int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
                 int percentage = (int) (((float) (firstVisibleItemPosition + visibleItemCount) / totalItemCount) * 100);
 
-                // Update the progress bar with the percentage
-                progressBar.setProgress(percentage);
+                // Actualizamos el progreso de cada ProgressBar en el RecyclerView "recycleBarraProgreso"
+                for (int i = 0; i < recycleBarraProgreso.getChildCount(); i++) {
+                    View itemView = recycleBarraProgreso.getChildAt(i);
+                    ProgressBar progressBar = itemView.findViewById(R.id.pbListaCiclos);
+                    progressBar.setProgress(percentage);
+                }
             }
         });
-
         return vista;
 
     }
 
     private void cargarListaBarraProgreso() {
-
-        progreso2=new ProgressDialog(getContext());
-        progreso2.setMessage("Buscando... ");
+        progreso2 = new ProgressDialog(getContext());
+        progreso2.setMessage("Buscando...");
         progreso2.show();
-        String url = Utilidades.RUTA+ "barraCarrera?id_carrera=1";
+        String url = Utilidades.RUTA + "barraCarrera?id_carrera=1";
 
-            jsonArrayRequest2 = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
-                @Override
-                public void onResponse(JSONArray response2) {
-                    BarraProgreso barra = null;
-                    progreso2.hide();
-                    JSONArray json2 = response2.optJSONArray(0);
-                    try {
-                        for (int i=0;i<response2.length();i++) {
-//                            barra = new BarraProgreso();
-//                            JSONObject jsonObject2= null;
-//                            jsonObject2 = response2.getJSONObject(i);
-//                        barra.setDescripcion(jsonObject2.getString("Descripcion"));
-//                        listaBarraProgreso.add(barra);
+        jsonArrayRequest2 = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response2) {
+                progreso2.hide();
+                try {
+                    for (int i = 0; i < response2.length(); i++) {
+                        JSONObject objeto = response2.getJSONObject(i);
+                        String idCarrera = objeto.getString("id_carrera");
+                        String idBarra = objeto.getString("id_barra");
+                        String descripcionBarra = objeto.getString("descripcion_barra");
 
-                            // Acceder a los datos de cada objeto dentro del array
-                            JSONObject objeto = json2.getJSONObject(i);
-                            String idCarrera = objeto.getString("id_carrera");
-                            String idBarra = objeto.getString("id_barra");
-                            String descripcionBarra = objeto.getString("descripcion_barra");
+                        BarraProgreso datos = new BarraProgreso(idCarrera, idBarra, descripcionBarra);
+                        listaBarraProgreso.add(datos);
+                    }
 
-                            // Hacer algo con los datos obtenidos, como agregarlos a una lista o mostrarlos en la interfaz de usuario
-                            // ...
-
-                            // En su caso, puede guardar los datos en una lista o en un objeto personalizado
-                            // Por ejemplo, si tiene una clase llamada Datos, puede crear un objeto y agregar los datos de esta manera:
-                            BarraProgreso datos = new BarraProgreso(idCarrera, idBarra, descripcionBarra);
-                            listaBarraProgreso.add(datos);
-
-                            }
                     AdaptadorBarraProgreso adapter2 = new AdaptadorBarraProgreso(listaBarraProgreso);
                     recycleBarraProgreso.setAdapter(adapter2);
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-                catch (Exception e){e.printStackTrace();}
-                progreso2.hide();
             }
-        },new Response.ErrorListener() {
-
+        }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.i("Error Voley", error.toString());
             }
         });
+
         requestQueue2.add(jsonArrayRequest2);
     }
+
 
     private void cargarListaCiclos() {
         progreso=new ProgressDialog(getContext());

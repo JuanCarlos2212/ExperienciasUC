@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/scrollView"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
@@ -12,8 +13,6 @@
         tools:context=".Lista_Ciclos">
 
         <!-- TODO: Update blank fragment layout -->
-
-
 
         <TextView
             android:layout_width="match_parent"
@@ -28,8 +27,9 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerCiclos"
             android:layout_width="match_parent"
-            android:layout_height="281dp"
-            android:layout_margin="20dp" />
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:layout_margin="10dp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerBarraProgreso"
@@ -39,38 +39,35 @@
             android:background="#92808080"/>
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:orientation="vertical"
-            android:layout_marginTop="15dp"
-            >
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:text="Inicia tu carrera universitaria..."></TextView>
-            <ProgressBar
-                android:id="@+id/progressBar6"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:progress="10"
-
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="10dp"
-                android:max="80"
-                android:progressDrawable="@drawable/progressbar_custom"
-
-                />
 
 
-        </LinearLayout>
+
+<!--        <FrameLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="100dp"-->
+<!--            android:background="#7E000000"-->
+<!--            android:layout_marginTop="15dp">-->
+
+<!--            <ProgressBar-->
+<!--                android:id="@+id/progressBar6"-->
+<!--                style="?android:attr/progressBarStyleHorizontal"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="25dp"-->
+<!--                android:max="100"-->
+<!--                android:progress="10"-->
+<!--                android:progressDrawable="@drawable/progressbar_custom" />-->
+
+<!--            <TextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Inicia tu carrera universitaria..."-->
+<!--                android:textColor="@color/white"-->
+<!--                android:textStyle="bold"-->
+<!--                android:textSize="16sp"-->
+<!--                android:layout_marginLeft="10dp"/>-->
+
+<!--        </FrameLayout>-->
+
 
     </LinearLayout>
-</ScrollView>
+</LinearLayout>

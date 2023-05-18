@@ -77,15 +77,17 @@ public class fragment_presentacion2 extends Fragment {
                 startActivity(i);
             }
         });
-        LottieAnimationView animationView = vista.findViewById(R.id.animationView2);
-        animationView.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                animationView.playAnimation();
-                animationView.setVisibility(View.VISIBLE);;
-                btnsiguiente.setVisibility(View.VISIBLE);
-            }
-        }, 8000); // Retraso de 3000 milisegundos (3 segundos)
+
+        //Codigo para poner un delay a la animacion
+//        LottieAnimationView animationView = vista.findViewById(R.id.animationView2);
+//        animationView.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                animationView.playAnimation();
+//                animationView.setVisibility(View.VISIBLE);;
+//                btnsiguiente.setVisibility(View.VISIBLE);
+//            }
+//        }, 8000); // Retraso de 3000 milisegundos (3 segundos)
 
 
         return vista;
