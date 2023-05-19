@@ -64,7 +64,7 @@ public class fragment_contactanos extends Fragment {
     private void abrirWhatsAppChat() {
 
         String numeroEnviarMensaje = "939264247";
-        String mensaje = "*¡Hola!*Estoy interesado en una de las carreras que conoci a travez del aplicativo *Experiencias UC :D*";
+        String mensaje = "*¡Hola!* Estoy interesado en una de las carreras que conoci a travez del aplicativo *Experiencias UC :D*";
         Uri uri = Uri.parse("https://api.whatsapp.com/send?phone=" + numeroEnviarMensaje+ "&text=" + Uri.encode(mensaje));
 
         // Creamos el Intent con la acción "ACTION_VIEW" y el URI de WhatsApp

@@ -1,0 +1,15 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape xmlns:android="http://schemas.android.com/apk/res/android">
+            <solid android:color="#FFFFFF" />
+            <corners android:radius="10dp" />
+        </shape>
+    </item>
+
+    <item
+        android:drawable="@drawable/ic_spineeerrr"
+        android:gravity="end|center"
+        android:right="30dp"
+        android:state_selected="true" />
+
+</layer-list>
