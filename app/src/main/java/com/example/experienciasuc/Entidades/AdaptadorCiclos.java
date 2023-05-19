@@ -1,6 +1,8 @@
 package com.example.experienciasuc.Entidades;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,12 +65,21 @@ public class AdaptadorCiclos extends RecyclerView.Adapter<AdaptadorCiclos.Ciclos
     @Override
     public void onBindViewHolder(@NonNull @NotNull CiclosHolder holder, int position) {
         // holder.txtId.setText(lista_ciclos.get(position).getId_ciclo());
+        holder.Ruta= lista_ciclos.get(position).getRuta();
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), experiencias_ciclo.class);
+               Intent intent = new Intent(view.getContext(), experiencias_ciclo.class);
                 view.getContext().startActivity(intent);
+                // Obtener la instancia de SharedPreferences
+                SharedPreferences sharedPreferences = holder.itemView.getContext().getSharedPreferences("ImgCiclo", Context.MODE_PRIVATE);
+                // Obtener el editor de SharedPreferences
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                // Guardar una variable
+                editor.putString("keyImagen",holder.Ruta);
+                editor.apply();
+
             }
         });
         if (lista_ciclos.get(position).getImagen_ciclo() != null)
@@ -89,6 +100,7 @@ public class AdaptadorCiclos extends RecyclerView.Adapter<AdaptadorCiclos.Ciclos
     public class CiclosHolder extends RecyclerView.ViewHolder {
         TextView txtDesc;
         ImageView imgCiclos;
+        String Ruta;
         public CiclosHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             // txtId= itemView.findViewById(R.id.txt_descripcion);

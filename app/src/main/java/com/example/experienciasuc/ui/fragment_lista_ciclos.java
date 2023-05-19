@@ -1,6 +1,8 @@
 package com.example.experienciasuc.ui;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -56,6 +58,7 @@ public class fragment_lista_ciclos extends Fragment {
 
 
     ProgressBar progressBar;
+
 
     public fragment_lista_ciclos() {
         // Required empty public constructor
@@ -208,7 +211,7 @@ public class fragment_lista_ciclos extends Fragment {
 
                         ciclos.setDataImagen(jsonObject.getString("Imagen"));
                         ciclos.setDescripcion(jsonObject.getString("Tag"));
-
+                        ciclos.setRuta(jsonObject.getString("Imagen"));
 
 
                         lista_Ciclos.add(ciclos);

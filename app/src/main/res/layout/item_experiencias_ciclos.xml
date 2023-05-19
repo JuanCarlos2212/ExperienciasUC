@@ -10,14 +10,14 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="100dp"
         app:layout_constraintBottom_toTopOf="@+id/imgImagenFondo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:cardElevation="15dp"
         android:layout_margin="5dp"
-        app:cardCornerRadius="50dp">
+        app:cardCornerRadius="25dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -48,8 +48,8 @@
 
                 <ImageView
                     android:id="@+id/imgImagenIcono"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:foregroundGravity="left"
                     android:src="@mipmap/ic_launcher"
@@ -57,21 +57,21 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:shapeAppearanceOverlay="@style/roundImageView"
-                    android:layout_margin="10dp">
+                    app:shapeAppearanceOverlay="@style/roundImageView">
 
 
                 </ImageView>
 
                 <TextView
+                    android:id="@+id/nombre_categoria"
                     android:layout_width="match_parent"
                     android:layout_height="35dp"
                     android:layout_gravity="center"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
                     android:gravity="center"
                     android:text="Nombre de Experiencia"
-                    android:background="@drawable/fondo_imagen_degradado"
-                    android:textColor="@color/white"
-                    >
+                    android:textColor="@color/white">
 
                 </TextView>
 

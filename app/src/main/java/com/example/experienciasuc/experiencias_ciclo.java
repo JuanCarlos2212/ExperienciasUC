@@ -2,11 +2,18 @@ package com.example.experienciasuc;
 
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -22,7 +29,10 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.experienciasuc.Entidades.BtnExperiencias;
 import com.example.experienciasuc.Entidades.BtnExperienciasAdapter;
+import com.example.experienciasuc.Entidades.CiclosGreen;
 import com.example.experienciasuc.R;
+import android.graphics.Bitmap;
+import android.widget.Toast;
 
 
 import org.json.JSONArray;
@@ -47,6 +57,10 @@ public class experiencias_ciclo extends AppCompatActivity implements Response.Li
 
     JsonObjectRequest jsonObjectRequest;
 
+    ImageView imagenCiclo;
+
+
+
     private RecyclerView.LayoutManager mLayoutMager;
 
     public experiencias_ciclo() {
@@ -67,6 +81,21 @@ public class experiencias_ciclo extends AppCompatActivity implements Response.Li
 
         mLayoutMager = new GridLayoutManager(this, getSpanCount());
         recyclerExperiencia.setLayoutManager(mLayoutMager);
+
+        imagenCiclo=findViewById(R.id.imgCiclo);
+
+        SharedPreferences sharedPreferences= getSharedPreferences("ImgCiclo", Context.MODE_PRIVATE);
+        String valor = sharedPreferences.getString("keyImagen","no esta agarrando");
+
+        try {
+
+            byte[] bytecode= Base64.decode(valor,Base64.DEFAULT);
+           Bitmap imagenNumero= BitmapFactory.decodeByteArray(bytecode,0,bytecode.length);
+           imagenCiclo.setImageBitmap(imagenNumero);
+        }
+        catch (Exception e){e.printStackTrace();}
+
+
 
         SubirListaBotones();
     }
@@ -112,10 +141,9 @@ public class experiencias_ciclo extends AppCompatActivity implements Response.Li
                         JSONObject jsonObject = null;
                         jsonObject = response.getJSONObject(i);
 
-                       // experiencia.setNombreSede(jsonObject.getString("NombreSede"));
-                       // String id_carrera = jsonObject.getString("id_carrera");
-                       // String id_sede = jsonObject.getString("id_sede");
+                        experiencia.setNombre_categoria(jsonObject.getString("nombre_categoria"));
                         experiencia.setDataImagenIcon(jsonObject.getString("icono_categoria_blob"));
+
 
                         listExperiencia.add(experiencia);
                     }
