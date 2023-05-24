@@ -30,7 +30,7 @@
         android:layout_height="100dp"
         android:gravity="center"
         android:text="A continuacion se presentaran nuestras sedes, elige alguna y vive la experiencia UC"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="parent"
