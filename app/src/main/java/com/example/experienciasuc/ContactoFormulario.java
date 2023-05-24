@@ -164,6 +164,13 @@ Button btnEnviarFormulario;
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        edtapePaterno.setText("");
+                        tdtnombre.setText("");
+                        edtapellidomaterno.setText("");
+                        tdtCorreo.setText("");
+                        tdtCelular.setText("");
+                        edtfechanac.setText("");
+                        btnEnviarFormulario.setText("");
                         Toast.makeText(ContactoFormulario.this, "Registrado Correctamente", Toast.LENGTH_SHORT).show();
                         progreso.hide();
                     }
