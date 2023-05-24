@@ -82,6 +82,7 @@ public class experiencias_ciclo extends AppCompatActivity implements Response.Li
         //mLayoutMager = new GridLayoutManager(this, getSpanCount());
         //recyclerExperiencia.setLayoutManager(mLayoutMager);
 
+
         imagenCiclo=findViewById(R.id.imgCiclo);
 
         SharedPreferences sharedPreferences= getSharedPreferences("ImgCiclo", Context.MODE_PRIVATE);
@@ -143,6 +144,7 @@ public class experiencias_ciclo extends AppCompatActivity implements Response.Li
 
                         experiencia.setNombre_categoria(jsonObject.getString("nombre_categoria"));
                         experiencia.setDataImagenIcon(jsonObject.getString("icono_categoria_blob"));
+                        experiencia.setId_experiencia(jsonObject.getInt("id_experiencia"));
 
 
                         listExperiencia.add(experiencia);

@@ -28,17 +28,7 @@ public class AdaptadorCiclos extends RecyclerView.Adapter<AdaptadorCiclos.Ciclos
 
     List<CiclosGreen> lista_ciclos;
 
-//    private RecyclerView.OnScrollListener onScrollListener;
-//
-//    public void setOnScrollListener(RecyclerView.OnScrollListener onScrollListener) {
-//        this.onScrollListener = onScrollListener;
-//    }
-//
-//    @Override
-//    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
-//        super.onAttachedToRecyclerView(recyclerView);
-//        recyclerView.addOnScrollListener(onScrollListener);
-//    }
+
 
     private View.OnClickListener listener;
 
