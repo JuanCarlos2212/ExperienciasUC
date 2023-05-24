@@ -61,7 +61,7 @@ public class experiencias_ciclo extends AppCompatActivity implements Response.Li
 
 
 
-    private RecyclerView.LayoutManager mLayoutMager;
+    //private RecyclerView.LayoutManager mLayoutMager;
 
     public experiencias_ciclo() {
 
@@ -79,8 +79,8 @@ public class experiencias_ciclo extends AppCompatActivity implements Response.Li
 
         requestQueue = Volley.newRequestQueue(this);
 
-        mLayoutMager = new GridLayoutManager(this, getSpanCount());
-        recyclerExperiencia.setLayoutManager(mLayoutMager);
+        //mLayoutMager = new GridLayoutManager(this, getSpanCount());
+        //recyclerExperiencia.setLayoutManager(mLayoutMager);
 
         imagenCiclo=findViewById(R.id.imgCiclo);
 
@@ -100,19 +100,19 @@ public class experiencias_ciclo extends AppCompatActivity implements Response.Li
         SubirListaBotones();
     }
 
-    private int getSpanCount() {
-        DisplayMetrics metrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+    //private int getSpanCount() {
+       // DisplayMetrics metrics = new DisplayMetrics();
+      //  getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
-        int anchuraPantalla = metrics.widthPixels;
+       // int anchuraPantalla = metrics.widthPixels;
 
-        float anchuraMinimaElemento = TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_DIP,
-                150,
-                metrics
-        );
-        return (int)(anchuraPantalla / anchuraMinimaElemento);
-    }
+      //  float anchuraMinimaElemento = TypedValue.applyDimension(
+              //  TypedValue.COMPLEX_UNIT_DIP,
+              //  150,
+              //  metrics
+      //  );
+       // return (int)(anchuraPantalla / anchuraMinimaElemento);
+   // }
 
 
 

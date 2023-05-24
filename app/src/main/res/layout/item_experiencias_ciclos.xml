@@ -40,7 +40,7 @@
                 android:id="@+id/fondo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/uno"
+                android:background="@drawable/degradado_boton"
                 android:gravity="center"
                 android:orientation="vertical"
                 tools:layout_editor_absoluteX="-49dp"
