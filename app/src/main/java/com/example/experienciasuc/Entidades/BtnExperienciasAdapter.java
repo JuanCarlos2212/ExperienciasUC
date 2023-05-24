@@ -49,7 +49,7 @@ public class BtnExperienciasAdapter extends RecyclerView.Adapter<BtnExperiencias
     @Override
     public void onBindViewHolder(@NonNull ExperienciaHolder holder, int position) {
 
-        //holder.txtNombre_sede.setText(listExperiencias.get(position).getNombreSede());
+        holder.nombre_categria.setText(listExperiencias.get(position).getNombre_categoria());
 
         if(listExperiencias.get(position).getIcono_categoria_blob() != null)
             holder.ImgIcono.setImageBitmap(listExperiencias.get(position).getIcono_categoria_blob());
@@ -64,11 +64,11 @@ public class BtnExperienciasAdapter extends RecyclerView.Adapter<BtnExperiencias
 
     public class ExperienciaHolder extends RecyclerView.ViewHolder {
 
-        TextView txtId_sede;
+        TextView nombre_categria;
         ImageView ImgIcono;
         public ExperienciaHolder(View itemView) {
             super(itemView);
-           // txtNombre_sede= itemView.findViewById(R.id.txtNombreCampus);
+           nombre_categria= itemView.findViewById(R.id.nombre_categoria);
             ImgIcono = itemView.findViewById(R.id.imgImagenIcono);
 
         }

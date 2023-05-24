@@ -10,15 +10,16 @@ public class BtnExperiencias {
 
     private Bitmap icono_categoria_blob;
 
-  //  private Bitmap blob_ciclo;
+    private String nombre_categoria;
 
     public BtnExperiencias(){
 
     }
 
-    public BtnExperiencias(Integer id_experiencia, Bitmap icono_categoria_blob) {
+    public BtnExperiencias(Integer id_experiencia, Bitmap icono_categoria_blob, String nombre_categoria) {
         this.id_experiencia = id_experiencia;
         this.icono_categoria_blob = icono_categoria_blob;
+        this.nombre_categoria= nombre_categoria;
     }
 
     public Integer getId_experiencia() {
@@ -50,11 +51,21 @@ public class BtnExperiencias {
 
 
     }
+
+    public String getNombre_categoria() {
+        return nombre_categoria;
+    }
+
+    public void setNombre_categoria(String nombre_categoria) {
+        this.nombre_categoria = nombre_categoria;
+    }
+
     @Override
     public String toString() {
         return "BtnExperiencias{" +
                 "id_experiencia=" + id_experiencia +
                 ", icono_categoria_blob=" + icono_categoria_blob +
+                ", nombre_categoria='" + nombre_categoria + '\'' +
                 '}';
     }
 }

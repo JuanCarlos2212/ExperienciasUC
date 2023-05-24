@@ -9,14 +9,18 @@ public class CiclosGreen {
     private String id_ciclo;
     private Bitmap imagen_ciclo;
     private String descripcion;
+    private String Ruta;
+
+
     public CiclosGreen(){
 
     }
 
-    public CiclosGreen(String id_ciclo, Bitmap imagen_ciclo, String descripcion) {
+    public CiclosGreen(String id_ciclo, Bitmap imagen_ciclo, String descripcion, String ruta) {
         this.id_ciclo = id_ciclo;
         this.imagen_ciclo = imagen_ciclo;
         this.descripcion = descripcion;
+        Ruta = ruta;
     }
 
     public String getId_ciclo() {
@@ -49,12 +53,21 @@ public class CiclosGreen {
         this.descripcion = descripcion;
     }
 
+    public String getRuta() {
+        return Ruta;
+    }
+
+    public void setRuta(String ruta) {
+        Ruta = ruta;
+    }
+
     @Override
     public String toString() {
         return "CiclosGreen{" +
                 "id_ciclo='" + id_ciclo + '\'' +
                 ", imagen_ciclo=" + imagen_ciclo +
                 ", descripcion='" + descripcion + '\'' +
+                ", Ruta='" + Ruta + '\'' +
                 '}';
     }
 }
