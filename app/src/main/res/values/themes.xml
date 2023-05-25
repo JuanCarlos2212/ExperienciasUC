@@ -32,5 +32,8 @@
         <item name="android:background">@color/white</item>
         <item name="android:drawableEnd">@drawable/ic_fecha</item>
     </style>
+    <style name="CustomAlertDialog" parent="AlertDialog.AppCompat">
+        <item name="android:background">@drawable/corner_dialog</item>
+    </style>
 
 </resources>
