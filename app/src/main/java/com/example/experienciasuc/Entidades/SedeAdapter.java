@@ -1,5 +1,6 @@
 package com.example.experienciasuc.Entidades;
 
+import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.experienciasuc.R;
 import com.example.experienciasuc.lista_carreras;
 
@@ -17,7 +21,9 @@ import java.util.List;
 
 public class SedeAdapter extends RecyclerView.Adapter<SedeAdapter.CampusHolder> implements View.OnClickListener {
 
-    List<Sede> listaSede;
+   // private Context mCtx;
+    private List<Sede> listaSede;
+
 
     private View.OnClickListener listener;
 
@@ -26,7 +32,9 @@ public class SedeAdapter extends RecyclerView.Adapter<SedeAdapter.CampusHolder> 
 
     }
 
-    public SedeAdapter(List<Sede> listaCampus) {this.listaSede = listaCampus; }
+    public SedeAdapter(List<Sede> listaCampus) {
+        this.listaSede = listaCampus;
+    }
 
 
     @NonNull
@@ -47,10 +55,15 @@ public class SedeAdapter extends RecyclerView.Adapter<SedeAdapter.CampusHolder> 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CampusHolder holder, int position) {
+    public void onBindViewHolder(CampusHolder holder, int position) {
+
+
+        RequestOptions requestOptions = new RequestOptions().diskCacheStrategy(DiskCacheStrategy.ALL);
+
 
         holder.txtNombre_sede.setText(listaSede.get(position).getNombreSede());
-
+        holder.ImgCampus.setVisibility(View.VISIBLE);
+        Glide.with(holder.ImgCampus.getContext()).load(listaSede.get(position)).apply(requestOptions).into(holder.ImgCampus);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,10 +72,10 @@ public class SedeAdapter extends RecyclerView.Adapter<SedeAdapter.CampusHolder> 
             }
         });
 
-        if(listaSede.get(position).getImagen() != null)
-            holder.ImgCampus.setImageBitmap(listaSede.get(position).getImagen());
-        else
-            holder.ImgCampus.setImageResource(R.drawable.img_base);
+       // if(listaSede.get(position).getImagen() != null)
+         //   holder.ImgCampus.setImageBitmap(listaSede.get(position).getImagen());
+       // else
+       //     holder.ImgCampus.setImageResource(R.drawable.img_base);
     }
 
     @Override
@@ -77,7 +90,7 @@ public class SedeAdapter extends RecyclerView.Adapter<SedeAdapter.CampusHolder> 
         public CampusHolder(View itemView) {
             super(itemView);
              txtNombre_sede= itemView.findViewById(R.id.txtNombreCampus);
-            ImgCampus = itemView.findViewById(R.id.imgImagenSede);
+             ImgCampus = itemView.findViewById(R.id.imgImagenSede);
 
         }
     }
