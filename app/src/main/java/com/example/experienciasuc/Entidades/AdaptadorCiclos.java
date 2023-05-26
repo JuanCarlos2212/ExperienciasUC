@@ -56,11 +56,15 @@ public class AdaptadorCiclos extends RecyclerView.Adapter<AdaptadorCiclos.Ciclos
     public void onBindViewHolder(@NonNull @NotNull CiclosHolder holder, int position) {
         // holder.txtId.setText(lista_ciclos.get(position).getId_ciclo());
         holder.Ruta= lista_ciclos.get(position).getRuta();
+        String idCiclo = lista_ciclos.get(position).getId_ciclo();
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                Intent intent = new Intent(view.getContext(), experiencias_ciclo.class);
+
+                intent.putExtra("ciclo", idCiclo);
                 view.getContext().startActivity(intent);
                 // Obtener la instancia de SharedPreferences
                 SharedPreferences sharedPreferences = holder.itemView.getContext().getSharedPreferences("ImgCiclo", Context.MODE_PRIVATE);

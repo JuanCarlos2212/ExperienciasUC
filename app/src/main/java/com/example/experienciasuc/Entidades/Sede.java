@@ -13,18 +13,18 @@ public class Sede {
 
     private String Ruta;
 
-    private Bitmap Imagen;
+    //private Bitmap Imagen;
 
     public Sede(){
 
     }
 
-    public Sede(Integer ID, String NombreSede, String Ruta, Bitmap Imagen)
+    public Sede(Integer ID, String NombreSede, String Ruta)
     {
         this.ID = ID;
         this.NombreSede = NombreSede;
         this.Ruta = Ruta;
-        this.Imagen = Imagen;
+       // this.Imagen = Imagen;
 
     }
 
@@ -44,25 +44,23 @@ public class Sede {
     public String getRuta() {return Ruta;}
     public void setRuta(String Ruta) {this.Ruta = Ruta; }
 
-    public Bitmap getImagen() { return Imagen;}
-    public void setImagen(Bitmap Imagen){
-        this.Imagen = Imagen;
-    }
-
-    public void setDataImagen(String data){
-        try{
-            byte[] bytecode = Base64.decode(data,Base64.DEFAULT);
-            this.Imagen = BitmapFactory.decodeByteArray(bytecode,0,bytecode.length);
+    //public Bitmap getImagen() { return Imagen;}
+   // public void setImagen(Bitmap Imagen){this.Imagen = Imagen;}
 
 
-        }catch (Exception e)
-        {
-            e.printStackTrace();
+   // public void setDataImagen(String data){
+        //try{
+          //  byte[] bytecode = Base64.decode(data,Base64.DEFAULT);
+           // this.Imagen = BitmapFactory.decodeByteArray(bytecode,0,bytecode.length);
 
-        }
 
+       // }catch (Exception e)
+        //{
+         //   e.printStackTrace();
 
-    }
+       // }
+   // }
+
 
     @Override
     public String toString() {
@@ -70,7 +68,6 @@ public class Sede {
                 "ID=" + ID +
                 ", NombreSede='" + NombreSede + '\'' +
                 ", Ruta='" + Ruta + '\'' +
-                ", Imagen=" + Imagen +
                 '}';
     }
 }
