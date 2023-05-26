@@ -89,7 +89,7 @@ public class lista_campus extends AppCompatActivity implements Response.Listener
 
                         campus.setId(jsonObject.getInt("ID"));
                         campus.setNombreSede(jsonObject.getString("NombreSede"));
-                        campus.setRuta(jsonObject.getString("Imagen"));
+                        campus.setRuta(jsonObject.getString("Ruta"));
 
                         listaSede.add(campus);
                     }

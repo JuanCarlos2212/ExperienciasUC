@@ -29,7 +29,6 @@ public class SedeAdapter extends RecyclerView.Adapter<SedeAdapter.CampusHolder> 
 
     @Override
     public void onClick(View view) {
-
     }
 
     public SedeAdapter(List<Sede> listaCampus) {
@@ -57,18 +56,19 @@ public class SedeAdapter extends RecyclerView.Adapter<SedeAdapter.CampusHolder> 
     @Override
     public void onBindViewHolder(CampusHolder holder, int position) {
 
+        String url;
+        url=listaSede.get(position).getRuta();
 
         RequestOptions requestOptions = new RequestOptions().diskCacheStrategy(DiskCacheStrategy.ALL);
 
-
         holder.txtNombre_sede.setText(listaSede.get(position).getNombreSede());
-        holder.ImgCampus.setVisibility(View.VISIBLE);
-        Glide.with(holder.ImgCampus.getContext()).load(listaSede.get(position)).apply(requestOptions).into(holder.ImgCampus);
+        Glide.with(holder.ImgCampus.getContext()).load(url).apply(requestOptions).into(holder.ImgCampus);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), lista_carreras.class);
                 v.getContext().startActivity(intent);
+
             }
         });
 
