@@ -3,6 +3,7 @@ package com.example.experienciasuc;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -59,7 +60,7 @@ public class experiencias_ciclo extends AppCompatActivity implements Response.Li
 
     ImageView imagenCiclo;
 
-
+    int idCiclo;
 
     //private RecyclerView.LayoutManager mLayoutMager;
 
@@ -82,6 +83,10 @@ public class experiencias_ciclo extends AppCompatActivity implements Response.Li
         //mLayoutMager = new GridLayoutManager(this, getSpanCount());
         //recyclerExperiencia.setLayoutManager(mLayoutMager);
 
+        Intent intent = getIntent();
+        idCiclo = Integer.parseInt(intent.getStringExtra("ciclo"));
+      //  String prueba=intent.getStringExtra("ciclo");
+      //  Toast.makeText(this, ""+prueba, Toast.LENGTH_SHORT).show();
 
         imagenCiclo=findViewById(R.id.imgCiclo);
 
@@ -141,13 +146,17 @@ public class experiencias_ciclo extends AppCompatActivity implements Response.Li
 
                         JSONObject jsonObject = null;
                         jsonObject = response.getJSONObject(i);
+                        int inicio=jsonObject.getInt("ciclo_inicio");
+                        int fin=jsonObject.getInt("ciclo_fin");
 
                         experiencia.setNombre_categoria(jsonObject.getString("nombre_categoria"));
                         experiencia.setDataImagenIcon(jsonObject.getString("icono_categoria_blob"));
                         experiencia.setId_experiencia(jsonObject.getInt("id_experiencia"));
 
 
-                        listExperiencia.add(experiencia);
+                       if ( idCiclo>= inicio &&  idCiclo<= fin) {
+                            listExperiencia.add(experiencia);
+                        }
                     }
                     BtnExperienciasAdapter adapter = new BtnExperienciasAdapter(listExperiencia);
                     recyclerExperiencia.setAdapter(adapter);

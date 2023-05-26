@@ -208,7 +208,7 @@ public class fragment_lista_ciclos extends Fragment {
                         JSONObject jsonObject= null;
                         jsonObject = response.getJSONObject(i);
 
-
+                        ciclos.setId_ciclo(jsonObject.getString("Id"));
                         ciclos.setDataImagen(jsonObject.getString("Imagen"));
                         ciclos.setDescripcion(jsonObject.getString("Tag"));
                         ciclos.setRuta(jsonObject.getString("Imagen"));
