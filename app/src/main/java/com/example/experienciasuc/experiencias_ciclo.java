@@ -14,6 +14,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
+import android.view.View;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -58,7 +59,7 @@ public class experiencias_ciclo extends AppCompatActivity implements Response.Li
 
     JsonObjectRequest jsonObjectRequest;
 
-    ImageView imagenCiclo;
+    ImageView imagenCiclo, btnvolver;
 
     int idCiclo;
 
@@ -77,7 +78,14 @@ public class experiencias_ciclo extends AppCompatActivity implements Response.Li
         recyclerExperiencia = findViewById(R.id.recyclerExperiencias);
         recyclerExperiencia.setLayoutManager(new LinearLayoutManager(this));
         recyclerExperiencia.setHasFixedSize(true);
+        btnvolver = findViewById(R.id.ic_regresar);
 
+        btnvolver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         requestQueue = Volley.newRequestQueue(this);
 
         //mLayoutMager = new GridLayoutManager(this, getSpanCount());

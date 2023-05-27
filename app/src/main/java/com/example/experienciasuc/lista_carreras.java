@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -37,6 +39,7 @@ public class lista_carreras extends AppCompatActivity implements Response.Listen
 
     JsonObjectRequest jsonObjectRequest;
     JsonArrayRequest jsonArrayRequest;
+    ImageView btnvolver;
 
     public lista_carreras() {
         // Required empty public constructor
@@ -63,6 +66,16 @@ public class lista_carreras extends AppCompatActivity implements Response.Listen
         CarrerasAdapter carrerasAdapter = new CarrerasAdapter(listaCarreras);
         recyclerCarreras.setAdapter(carrerasAdapter);
 
+        //boton de retroseso
+
+        btnvolver = findViewById(R.id.volvercarera);
+
+        btnvolver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         requestQueue = Volley.newRequestQueue(this);
 

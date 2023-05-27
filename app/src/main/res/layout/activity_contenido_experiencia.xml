@@ -46,7 +46,7 @@
 
         </androidx.cardview.widget.CardView>
 
-        <!-- Resto del contenido -->
+
 
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
@@ -58,23 +58,24 @@
 
             <ImageView
                 android:id="@+id/full"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:background="#7E00C1"
                 android:src="@drawable/ic_full"></ImageView>
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_margin="15dp"
             app:cardCornerRadius="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:id="@+id/volverlistabotones"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="5dp"
                 android:background="#7E00C1"
                 android:src="@drawable/ic_back_white"></ImageView>
         </androidx.cardview.widget.CardView>

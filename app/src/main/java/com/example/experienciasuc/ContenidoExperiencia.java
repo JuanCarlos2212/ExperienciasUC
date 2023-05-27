@@ -49,7 +49,7 @@ public class ContenidoExperiencia extends AppCompatActivity {
 
     WebView webViewContenido;
     YouTubePlayerView youTubePlayerViewContenido;
-    ImageView imageViewContenido,btnFullScreen;
+    ImageView imageViewContenido,btnFullScreen,btnvolver;
     String id_experiencia;
 
     @SuppressLint("MissingInflatedId")
@@ -94,7 +94,14 @@ public class ContenidoExperiencia extends AppCompatActivity {
         imageViewContenido = findViewById(R.id.ivContenidoExperiencia);
 
         btnFullScreen = findViewById(R.id.full);
+        btnvolver = findViewById(R.id.volverlistabotones);
 
+        btnvolver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         requestQueue = Volley.newRequestQueue(this);
 
