@@ -11,11 +11,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.WebView;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -87,7 +89,14 @@ public class ContenidoExperiencia extends AppCompatActivity {
         txtTitulo = findViewById(R.id.txtTituloExperiencia);
         txtSubTitulo = findViewById(R.id.txtSubtituloExperiencia);
         txtParrafo = findViewById(R.id.txtParrafoExperiencia);
-
+        txtParrafo.setMovementMethod(new ScrollingMovementMethod());
+//        ScrollView scrollView = findViewById(R.id.scrollViewNuevoContenido);
+//        scrollView.post(new Runnable() {
+//            @Override
+//            public void run() {
+//                scrollView.fullScroll(ScrollView.FOCUS_DOWN);
+//            }
+//        });
 
         webViewContenido =findViewById(R.id.wvContenidoExperiencia);
         youTubePlayerViewContenido = findViewById(R.id.ypvContenidoExperiencia);
