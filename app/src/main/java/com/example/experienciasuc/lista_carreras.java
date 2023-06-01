@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -102,7 +103,7 @@ public class lista_carreras extends AppCompatActivity implements Response.Listen
         String idSedeStr = idSede.toString();
 
 //        String url = "http://192.168.0.21/ExperienciasUC/ConsutlarListaCarreras_copia.php" ;
-        String url = Utilidades.RUTA + "listarCarreraSedeMovil?" + idSedeStr ;
+        String url = Utilidades.RUTA + "listarCarreraSedeMovil?id_sede=" + idSedeStr ;
 //        jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, this, this);
 //        requestQueue.add(jsonObjectRequest);
 
@@ -119,11 +120,11 @@ public class lista_carreras extends AppCompatActivity implements Response.Listen
                         JSONObject jsonObject = null;
                         jsonObject = response.getJSONObject(i);
 
-                        carreras.setIdcarrera(jsonObject.getInt("Id"));
-                        carreras.setNombre(jsonObject.getString("Nombre"));
-                        carreras.setDataImagen(jsonObject.getString("Imagen"));
-                        carreras.setPlan_estudios(jsonObject.getString("PlanEstudios"));
-                        carreras.setRutaimagen(jsonObject.getString("Ruta"));
+                        carreras.setIdcarrera(jsonObject.getInt("id_carrera"));
+                        carreras.setNombre(jsonObject.getString("nombre_carrera"));
+//                        carreras.setDataImagen(jsonObject.getString("Imagen"));
+                        carreras.setPlan_estudios(jsonObject.getString("plan_estudios_carrera"));
+                        carreras.setRutaimagen(jsonObject.getString("imagen_carrera"));
 
                         listaCarreras.add(carreras);
                     }
