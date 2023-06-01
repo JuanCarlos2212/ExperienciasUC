@@ -60,7 +60,7 @@ public class lista_carreras extends AppCompatActivity implements Response.Listen
 
 // Crear una instancia del adaptador y pasarlo al RecyclerView
 // por esta ecepcion E/RecyclerView: No adapter attached; skipping layout
-        CarrerasAdapter carrerasAdapter = new CarrerasAdapter(listaCarreras);
+        CarrerasAdapter carrerasAdapter = new CarrerasAdapter(listaCarreras, this);
         recyclerCarreras.setAdapter(carrerasAdapter);
 
 
@@ -95,10 +95,11 @@ public class lista_carreras extends AppCompatActivity implements Response.Listen
                         carreras.setNombre(jsonObject.getString("Nombre"));
                         carreras.setDataImagen(jsonObject.getString("Imagen"));
                         carreras.setPlan_estudios(jsonObject.getString("PlanEstudios"));
+                        carreras.setRutaimagen(jsonObject.getString("Ruta"));
 
                         listaCarreras.add(carreras);
                     }
-                    CarrerasAdapter adapter = new CarrerasAdapter(listaCarreras);
+                    CarrerasAdapter adapter = new CarrerasAdapter(listaCarreras,lista_carreras.this);
                     recyclerCarreras.setAdapter(adapter);
 
                 } catch (Exception e){

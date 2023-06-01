@@ -99,7 +99,7 @@ public class fragment_contactanos extends Fragment {
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setData(Uri.parse(url));
             startActivity(intent);
-        }
+        }//limite de horario debe de probenir de la base de datos
         else if (horaActual >= 15 && horaActual < 18) {
             // url de la sala de 3 a 6
             String url = "https://meet.google.com/dan-bcvy-bbi";
