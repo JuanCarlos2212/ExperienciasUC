@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FullContenido">
+<!--    <ImageView-->
+<!--        android:id="@+id/volvercontenidofull"-->
+<!--        android:layout_width="50dp"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:background="#7E00C1"-->
+<!--        android:layout_gravity="end"-->
+<!--        android:layout_margin="20dp"-->
+<!--        android:elevation="10dp"-->
+<!--        android:src="@drawable/ic_back_white"></ImageView>-->
+
+    <WebView
+        android:id="@+id/wvContenidoExperienciafull"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        ></WebView>
+
+    <ImageView
+        android:id="@+id/ivContenidoExperienciafull"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:visibility="gone"></ImageView>
+
+    <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+        android:id="@+id/ypvContenidoExperienciafull"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"></com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView>
+
+
+
+</FrameLayout>

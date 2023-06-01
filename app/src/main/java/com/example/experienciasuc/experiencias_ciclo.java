@@ -3,6 +3,7 @@ package com.example.experienciasuc;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -13,6 +14,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
+import android.view.View;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -57,9 +59,9 @@ public class experiencias_ciclo extends AppCompatActivity implements Response.Li
 
     JsonObjectRequest jsonObjectRequest;
 
-    ImageView imagenCiclo;
+    ImageView imagenCiclo, btnvolver;
 
-
+    int idCiclo;
 
     //private RecyclerView.LayoutManager mLayoutMager;
 
@@ -76,12 +78,23 @@ public class experiencias_ciclo extends AppCompatActivity implements Response.Li
         recyclerExperiencia = findViewById(R.id.recyclerExperiencias);
         recyclerExperiencia.setLayoutManager(new LinearLayoutManager(this));
         recyclerExperiencia.setHasFixedSize(true);
+        btnvolver = findViewById(R.id.ic_regresar);
 
+        btnvolver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         requestQueue = Volley.newRequestQueue(this);
 
         //mLayoutMager = new GridLayoutManager(this, getSpanCount());
         //recyclerExperiencia.setLayoutManager(mLayoutMager);
 
+        Intent intent = getIntent();
+        idCiclo = Integer.parseInt(intent.getStringExtra("ciclo"));
+      //  String prueba=intent.getStringExtra("ciclo");
+      //  Toast.makeText(this, ""+prueba, Toast.LENGTH_SHORT).show();
 
         imagenCiclo=findViewById(R.id.imgCiclo);
 
@@ -132,6 +145,7 @@ public class experiencias_ciclo extends AppCompatActivity implements Response.Li
             @Override
             public void onResponse(JSONArray response) {
 
+
                 BtnExperiencias experiencia = null;
                 progreso.hide();
 
@@ -141,13 +155,19 @@ public class experiencias_ciclo extends AppCompatActivity implements Response.Li
 
                         JSONObject jsonObject = null;
                         jsonObject = response.getJSONObject(i);
+                      //int inicio=jsonObject.getInt("ciclo_inicio");
+                     // int fin=jsonObject.getInt("ciclo_fin");
 
+                        experiencia.setInicio(jsonObject.getInt("ciclo_inicio"));
+                        experiencia.setFin(jsonObject.getInt("ciclo_fin"));
                         experiencia.setNombre_categoria(jsonObject.getString("nombre_categoria"));
                         experiencia.setDataImagenIcon(jsonObject.getString("icono_categoria_blob"));
                         experiencia.setId_experiencia(jsonObject.getInt("id_experiencia"));
 
 
-                        listExperiencia.add(experiencia);
+                       if ( idCiclo>= experiencia.getInicio()   &&  idCiclo<= experiencia.getFin()) {
+                            listExperiencia.add(experiencia);
+                        }
                     }
                     BtnExperienciasAdapter adapter = new BtnExperienciasAdapter(listExperiencia);
                     recyclerExperiencia.setAdapter(adapter);

@@ -1,55 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ContenidoExperiencia">
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Ruta Experiencia"
-        android:gravity="center_horizontal"
-        android:textSize="20dp"
-        android:textColor="@color/purple_700"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        />
-
-    <LinearLayout
+    ><LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_margin="20dp"
+        android:orientation="vertical">
 
-        android:background="@drawable/color_borde"
-        >
-        <TextView
-            android:id="@+id/txtTituloExperiencia"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="tituloPrincipal"
-            android:gravity="center_horizontal"
-            android:textSize="25dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="800dp"
+        tools:context=".ContenidoExperienciaNew">
+
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardview_arriba"
             android:layout_width="match_parent"
-            android:layout_height="320dp"
-            android:layout_margin="20dp"
+            android:layout_height="450dp"
+            app:layout_constraintBottom_toTopOf="@id/cardview_abajo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            >
             <WebView
                 android:id="@+id/wvContenidoExperiencia"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="20dp"
                 android:visibility="gone"></WebView>
 
             <ImageView
@@ -67,53 +46,105 @@
 
         </androidx.cardview.widget.CardView>
 
+
+
         <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="8dp"
-            >
+            android:layout_margin="20dp"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/full"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="#7E00C1"
+                android:src="@drawable/ic_full"></ImageView>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="15dp"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <ImageView
+                android:id="@+id/volverlistabotones"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="5dp"
+                android:background="#7E00C1"
+                android:src="@drawable/ic_back_white"></ImageView>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/txtTituloExperiencia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="25dp"
+            android:background="@drawable/fondo_imagen_degradado"
+            android:elevation="10dp"
+            android:gravity="center_horizontal"
+            android:padding="8dp"
+            android:text="tituloPrincipal"
+            android:textColor="@color/white"
+            android:textSize="25dp"
+            app:layout_constraintBottom_toBottomOf="@id/cardview_arriba"
+            app:layout_constraintStart_toStartOf="parent"
+
+
+            />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardview_abajo"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardview_arriba">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@drawable/fondo_contenido"
                 android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/txtSubtituloExperiencia"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
                     android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginEnd="20dp"
                     android:gravity="center_horizontal"
                     android:text="subtitulo"
-                    android:textSize="20dp"
-
-                    ></TextView>
+                    android:textColor="@color/white"
+                    android:textSize="25dp"></TextView>
 
                 <TextView
                     android:id="@+id/txtParrafoExperiencia"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
                     android:layout_marginStart="20dp"
+                    android:layout_marginTop="15dp"
                     android:layout_marginEnd="20dp"
                     android:layout_marginBottom="20dp"
                     android:gravity="center_horizontal"
                     android:text="parrafo resumen"
-                    ></TextView>
+                    android:textColor="@color/white"
+                    android:textSize="20dp"></TextView>
             </LinearLayout>
-
 
 
         </androidx.cardview.widget.CardView>
 
-
-
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+</ScrollView>

@@ -2,6 +2,7 @@ package com.example.experienciasuc;
 
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -31,6 +32,7 @@ import UtilExperiencias.Utilidades;
 
 public class lista_campus extends AppCompatActivity implements Response.Listener<JSONObject>, Response.ErrorListener {
 
+    Context mCtx;
     RecyclerView recyclerSede;
 
     ArrayList<Sede> listaSede;
@@ -57,6 +59,8 @@ public class lista_campus extends AppCompatActivity implements Response.Listener
         recyclerSede.setLayoutManager(new LinearLayoutManager(this));
         recyclerSede.setHasFixedSize(true);
 
+        SedeAdapter sedeAdapter = new SedeAdapter(listaSede);
+        recyclerSede.setAdapter(sedeAdapter);
         requestQueue = Volley.newRequestQueue(this);
 
         SubirListaSede();
@@ -83,8 +87,9 @@ public class lista_campus extends AppCompatActivity implements Response.Listener
                         JSONObject jsonObject = null;
                         jsonObject = response.getJSONObject(i);
 
+                        campus.setId(jsonObject.getInt("ID"));
                         campus.setNombreSede(jsonObject.getString("NombreSede"));
-                        campus.setDataImagen(jsonObject.getString("Imagen"));
+                        campus.setRuta(jsonObject.getString("Ruta"));
 
                         listaSede.add(campus);
                     }

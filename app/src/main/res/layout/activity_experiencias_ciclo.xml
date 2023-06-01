@@ -7,39 +7,44 @@
     android:orientation="vertical"
     tools:context=".experiencias_ciclo">
 
-    <ImageView
-        android:id="@+id/ic_regresar"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_gravity="right"
-        android:src="@drawable/ic_regresar"
-        android:layout_margin="5dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp">
+        android:layout_height="70dp"
+        android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/Nombre_carrera"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_margin="15dp"
-            android:textSize="18sp"
-            android:gravity="center"
-            android:text="Ingenieria de Sistemas e Informatica"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            />
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/Nombre_carrera"
+                android:layout_width="315dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="3dp"
+                android:gravity="center"
+                android:text="Ingenieria de Sistemas e Informatica"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/ic_regresar"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_regresar" />
+        </LinearLayout>
 
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:layout_margin="10dp"
-        >
+        android:layout_height="142dp"
+        android:layout_margin="10dp">
 
         <ImageView
             android:id="@+id/imgCiclo"
@@ -54,16 +59,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerExperiencias"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerExperiencias"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
 
 
-            />
-
-
-
+        />
 
 
 </LinearLayout>
