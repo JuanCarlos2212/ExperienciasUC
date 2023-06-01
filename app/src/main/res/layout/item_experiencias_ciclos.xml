@@ -47,7 +47,7 @@
                 tools:layout_editor_absoluteY="0dp">
 
                 <LinearLayout
-                    android:layout_width="137dp"
+                    android:layout_width="87dp"
                     android:layout_height="match_parent">
 
                     <ImageView
@@ -55,7 +55,7 @@
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_gravity="center"
-                        android:layout_margin="75dp"
+                        android:layout_margin="35dp"
                         android:src="@mipmap/ic_launcher"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -68,20 +68,57 @@
 
                 </LinearLayout>
 
-
-                <TextView
-                    android:id="@+id/nombre_categoria"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:gravity="left"
-                    android:text="Nombre de Experiencia"
-                    android:textColor="@color/white"
-                    android:textSize="18sp">
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-                </TextView>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp">
+
+                        <TextView
+                            android:id="@+id/nombre_categoria"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_margin="3dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:gravity="center"
+                            android:text="Nombre de Experiencia"
+                            android:textColor="@color/white"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            ></TextView>
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:id="@+id/nombre_cantciclos"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:gravity="center"
+                            android:text="Nombre de Experiencia"
+                            android:textColor="#AAAAAA"
+                            android:textSize="14sp"
+                            android:textStyle="bold">
+                        </TextView>
+                    </LinearLayout>
+
+
+
+
+                </LinearLayout>
+
+
+
 
             </LinearLayout>
 

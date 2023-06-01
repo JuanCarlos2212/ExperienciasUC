@@ -25,6 +25,7 @@ public class BtnExperienciasAdapter extends RecyclerView.Adapter<BtnExperiencias
 
     private View.OnClickListener listener;
 
+
     @Override
     public void onClick(View view) {
 
@@ -54,7 +55,13 @@ public class BtnExperienciasAdapter extends RecyclerView.Adapter<BtnExperiencias
     public void onBindViewHolder(@NonNull ExperienciaHolder holder, int position) {
 
         Integer id_experiencia2;
-
+        String texto1 = "Inicia en: ";
+        String texto2 = "Termina en: ";
+        int ini;
+        int f;
+        ini = listExperiencias.get(position).getInicio();
+        f=listExperiencias.get(position).getFin();
+        String textoCombinado = texto1 + " " + ini + " "+ texto2+ " "+ f;
         id_experiencia2 = listExperiencias.get(position).getId_experiencia();
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +90,7 @@ public class BtnExperienciasAdapter extends RecyclerView.Adapter<BtnExperiencias
             holder.ImgIcono.setImageBitmap(listExperiencias.get(position).getIcono_categoria_blob());
         else
             holder.ImgIcono.setImageResource(R.drawable.img_base);
+        holder.text.setText(textoCombinado);
     }
 
     @Override
@@ -94,11 +102,17 @@ public class BtnExperienciasAdapter extends RecyclerView.Adapter<BtnExperiencias
 
         TextView nombre_categria;
         ImageView ImgIcono;
-        Integer id_experiencia;
+
+        TextView text;
+
+
+
         public ExperienciaHolder(View itemView) {
             super(itemView);
            nombre_categria= itemView.findViewById(R.id.nombre_categoria);
             ImgIcono = itemView.findViewById(R.id.imgImagenIcono);
+            text =itemView.findViewById(R.id.nombre_cantciclos);
+
 
         }
     }
