@@ -2,11 +2,13 @@ package com.example.experienciasuc.Entidades;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -60,14 +62,25 @@ public class SedeAdapter extends RecyclerView.Adapter<SedeAdapter.CampusHolder> 
         url=listaSede.get(position).getRuta();
 
         RequestOptions requestOptions = new RequestOptions().diskCacheStrategy(DiskCacheStrategy.ALL);
-
         holder.txtNombre_sede.setText(listaSede.get(position).getNombreSede());
+        //obtenemos nombre de lista de sedes
+        String nombreSede =listaSede.get(position).getNombreSede();
+        Integer idSede = listaSede.get(position).getID();
         Glide.with(holder.ImgCampus.getContext()).load(url).apply(requestOptions).into(holder.ImgCampus);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SharedPreferences sharedPreferences = holder.itemView.getContext().getSharedPreferences("PreferSede", Context.MODE_PRIVATE);
+                // Obtener el editor de SharedPreferences
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                // Guardar una variable
+                editor.putString("keyNombreSede",nombreSede);
+                editor.putInt("idSede",idSede);
+                // Aplicar los cambios
+                editor.apply();
                 Intent intent = new Intent(v.getContext(), lista_carreras.class);
                 v.getContext().startActivity(intent);
+
 
             }
         });

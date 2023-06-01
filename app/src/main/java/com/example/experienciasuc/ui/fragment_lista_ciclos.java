@@ -1,5 +1,6 @@
 package com.example.experienciasuc.ui;
 
+import android.animation.ObjectAnimator;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.LinearInterpolator;
 import android.widget.ProgressBar;
 
 import androidx.fragment.app.Fragment;
@@ -92,32 +94,11 @@ public class fragment_lista_ciclos extends Fragment {
         recycleBarraProgreso.setHasFixedSize(true);
 
 
-//        progressBar = vista.findViewById(R.id.progressBar6);
-
-
 
         cargarListaCiclos();
 
         cargarListaBarraProgreso();
 
-
-
-//        recycleCiclos.addOnScrollListener(new RecyclerView.OnScrollListener() {
-//            @Override
-//            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-//                super.onScrolled(recyclerView, dx, dy);
-//
-//                // Calculate the percentage of the list that has been scrolled
-//                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
-//                int visibleItemCount = layoutManager.getChildCount();
-//                int totalItemCount = layoutManager.getItemCount();
-//                int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
-//                int percentage = (int) (((float) (firstVisibleItemPosition + visibleItemCount) / totalItemCount) * 100);
-//
-//                // Update the progress bar with the percentage
-//                progressBar.setProgress(percentage);
-//            }
-//        });
         recycleCiclos.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -130,16 +111,22 @@ public class fragment_lista_ciclos extends Fragment {
                 int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
                 int percentage = (int) (((float) (firstVisibleItemPosition + visibleItemCount) / totalItemCount) * 100);
 
-                // Actualizamos el progreso de cada ProgressBar en el RecyclerView "recycleBarraProgreso"
+                // Animamos el progreso de cada ProgressBar en el RecyclerView "recycleBarraProgreso"
                 for (int i = 0; i < recycleBarraProgreso.getChildCount(); i++) {
                     View itemView = recycleBarraProgreso.getChildAt(i);
                     ProgressBar progressBar = itemView.findViewById(R.id.pbListaCiclos);
-                    progressBar.setProgress(percentage);
+                    setProgressWithAnimation(progressBar, percentage);
                 }
             }
         });
         return vista;
 
+    }
+    private void setProgressWithAnimation(ProgressBar progressBar, int progress) {
+        ObjectAnimator progressAnimator = ObjectAnimator.ofInt(progressBar, "progress", progressBar.getProgress(), progress);
+        progressAnimator.setDuration(1000); // Duración de la animación en milisegundos
+        progressAnimator.setInterpolator(new LinearInterpolator()); // Interpolador lineal para un crecimiento gradual
+        progressAnimator.start();
     }
 
     private void cargarListaBarraProgreso() {

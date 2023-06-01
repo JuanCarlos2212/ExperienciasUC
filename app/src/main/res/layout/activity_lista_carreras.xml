@@ -42,10 +42,11 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/txtNombreSedeListSede"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_margin="10dp"
-        android:text="Campus Huancayo"
+        android:text="Nombre del campus"
         android:textSize="20dp"
         android:gravity="center"
         android:textColor="@color/black"></TextView>
