@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.experienciasuc.MainActivity;
 import com.example.experienciasuc.R;
 import com.example.experienciasuc.experiencias_ciclo;
@@ -28,7 +29,7 @@ public class AdaptadorCiclos extends RecyclerView.Adapter<AdaptadorCiclos.Ciclos
 
     List<CiclosGreen> lista_ciclos;
 
-
+    Context context;
 
     private View.OnClickListener listener;
 
@@ -37,7 +38,8 @@ public class AdaptadorCiclos extends RecyclerView.Adapter<AdaptadorCiclos.Ciclos
 
     }
 
-    public AdaptadorCiclos(List<CiclosGreen> lista_ciclos) {
+    public AdaptadorCiclos(Context context, List<CiclosGreen> lista_ciclos) {
+        this.context = context;
         this.lista_ciclos = lista_ciclos;
     }
     @NonNull
@@ -54,9 +56,15 @@ public class AdaptadorCiclos extends RecyclerView.Adapter<AdaptadorCiclos.Ciclos
     }
     @Override
     public void onBindViewHolder(@NonNull @NotNull CiclosHolder holder, int position) {
-        // holder.txtId.setText(lista_ciclos.get(position).getId_ciclo());
+
         holder.Ruta= lista_ciclos.get(position).getRuta();
         String idCiclo = lista_ciclos.get(position).getId_ciclo();
+        holder.txtDesc.setText(lista_ciclos.get(position).getDescripcion());
+
+        //para imagen de url
+        String rutaImagenCiclo;
+        rutaImagenCiclo = lista_ciclos.get(position).getRuta();
+
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,17 +79,15 @@ public class AdaptadorCiclos extends RecyclerView.Adapter<AdaptadorCiclos.Ciclos
                 // Obtener el editor de SharedPreferences
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 // Guardar una variable
-                editor.putString("keyImagen",holder.Ruta);
+                editor.putString("keyImagenciclo",rutaImagenCiclo);
                 editor.apply();
 
             }
         });
-        if (lista_ciclos.get(position).getImagen_ciclo() != null)
-            holder.imgCiclos.setImageBitmap(lista_ciclos.get(position).getImagen_ciclo());
-        else
-            holder.imgCiclos.setImageResource(R.drawable.img_base);
-        holder.txtDesc.setText(lista_ciclos.get(position).getDescripcion());
 
+        Glide.with(context)
+                .load(rutaImagenCiclo)
+                .into(holder.imgCiclos);
 
     }
 

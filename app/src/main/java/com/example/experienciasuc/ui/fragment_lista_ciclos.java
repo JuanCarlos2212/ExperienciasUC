@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.LinearInterpolator;
 import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -58,10 +60,12 @@ public class fragment_lista_ciclos extends Fragment {
     JsonArrayRequest jsonArrayRequest;
     JsonArrayRequest jsonArrayRequest2;
 
+    SharedPreferences sharedPreferences, sharedPreferencesSedes;
+
 
     ProgressBar progressBar;
 
-
+    TextView tvNombreCarreraCiclos;
     public fragment_lista_ciclos() {
         // Required empty public constructor
     }
@@ -80,6 +84,7 @@ public class fragment_lista_ciclos extends Fragment {
         lista_Ciclos = new ArrayList<>();
         listaBarraProgreso = new ArrayList<>();
 
+
         recycleCiclos = vista.findViewById(R.id.recyclerCiclos);
         recycleCiclos.setLayoutManager(new LinearLayoutManager(getContext()));
         recycleCiclos.setHasFixedSize(true);
@@ -94,7 +99,13 @@ public class fragment_lista_ciclos extends Fragment {
         recycleBarraProgreso.setHasFixedSize(true);
 
 
+        sharedPreferences= requireContext().getSharedPreferences("MiPref", getContext().MODE_PRIVATE);
+        sharedPreferencesSedes= requireContext().getSharedPreferences("ImgCiclo", getContext().MODE_PRIVATE);
 
+
+        String nombreCarreraenCiclos = sharedPreferences.getString("keynombreCarrera","Error Indefinido");
+        tvNombreCarreraCiclos = vista.findViewById(R.id.tvNombreCarreraCiclos);
+        tvNombreCarreraCiclos.setText(nombreCarreraenCiclos);
         cargarListaCiclos();
 
         cargarListaBarraProgreso();
@@ -133,7 +144,8 @@ public class fragment_lista_ciclos extends Fragment {
         progreso2 = new ProgressDialog(getContext());
         progreso2.setMessage("Buscando...");
         progreso2.show();
-        String url = Utilidades.RUTA + "barraCarrera?id_carrera=1";
+        Integer idCarrera = sharedPreferences.getInt("keytidcarrera",1);
+        String url = Utilidades.RUTA + "barraCarrera?id_carrera="+idCarrera;
 
         jsonArrayRequest2 = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
             @Override
@@ -171,7 +183,14 @@ public class fragment_lista_ciclos extends Fragment {
         progreso=new ProgressDialog(getContext());
         progreso.setMessage("Buscando ");
         progreso.show();
-        String url = Utilidades.RUTA+ "listarCiclos";
+
+
+        Integer idSede = sharedPreferencesSedes.getInt("idSede",1);
+        Integer idCarrera = sharedPreferences.getInt("keytidcarrera",1);
+
+        Toast.makeText(getContext(),"carrera "+ idCarrera+" sede: "+ idSede, Toast.LENGTH_SHORT).show();
+
+        String url = Utilidades.RUTA + "listarCiclosCarreras?id_carrera="+idCarrera+"&id_sede="+idSede;
 //        String url = Util.RUTA + "ConsultarListaCiclos.php";
 //        url=url.replace(" ","%20");
 //        jsonObjectRequest= new JsonObjectRequest(Request.Method.GET, url, null, this, this);
@@ -195,16 +214,14 @@ public class fragment_lista_ciclos extends Fragment {
                         JSONObject jsonObject= null;
                         jsonObject = response.getJSONObject(i);
 
-                        ciclos.setId_ciclo(jsonObject.getString("Id"));
-                        ciclos.setDataImagen(jsonObject.getString("Imagen"));
-                        ciclos.setDescripcion(jsonObject.getString("Tag"));
-                        ciclos.setRuta(jsonObject.getString("Imagen"));
-
+                        ciclos.setId_ciclo(jsonObject.getString("id_ciclo"));
+                        ciclos.setRuta(jsonObject.getString("ruta_ciclo"));
+                        ciclos.setDescripcion(jsonObject.getString("ciclo_tag"));
 
                         lista_Ciclos.add(ciclos);
 
                     }
-                    AdaptadorCiclos adapter = new AdaptadorCiclos(lista_Ciclos);
+                    AdaptadorCiclos adapter = new AdaptadorCiclos(getContext(),lista_Ciclos);
                     recycleCiclos.setAdapter(adapter);
                 }
                 catch (Exception e){e.printStackTrace();}
