@@ -145,7 +145,7 @@ public class fragment_lista_ciclos extends Fragment {
         progreso2.setMessage("Buscando...");
         progreso2.show();
         Integer idCarrera = sharedPreferences.getInt("keytidcarrera",1);
-        String url = Utilidades.RUTA + "barraCarrera?id_carrera="+idCarrera;
+        String url = Utilidades.RUTA + "barra/"+idCarrera;
 
         jsonArrayRequest2 = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
             @Override
