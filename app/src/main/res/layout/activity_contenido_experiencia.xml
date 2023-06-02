@@ -13,7 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="800dp"
+        android:layout_height="match_parent"
         tools:context=".ContenidoExperienciaNew">
 
 
@@ -37,13 +37,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:visibility="gone"></ImageView>
+                android:visibility="gone"/>
 
             <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
                 android:id="@+id/ypvContenidoExperiencia"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="gone"></com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView>
+                android:visibility="gone"/>
 
         </androidx.cardview.widget.CardView>
 
@@ -66,16 +66,16 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_margin="15dp"
             app:cardCornerRadius="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
             <ImageView
                 android:id="@+id/volverlistabotones"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:padding="5dp"
                 android:background="#7E00C1"
                 android:src="@drawable/ic_back_white"></ImageView>
@@ -102,46 +102,63 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cardview_abajo"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="350dp"
 
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cardview_arriba">
-
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/fondo_contenido"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/txtSubtituloExperiencia"
+                android:background="@drawable/fondo_contenido">
+                <androidx.core.widget.NestedScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:gravity="center_horizontal"
-                    android:text="subtitulo"
-                    android:textColor="@color/white"
-                    android:textSize="25dp"></TextView>
+                    android:layout_height="match_parent">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/txtParrafoExperiencia"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:gravity="center_horizontal"
-                    android:text="parrafo resumen"
-                    android:textColor="@color/white"
-                    android:textSize="20dp"></TextView>
+                        <TextView
+                            android:id="@+id/txtSubtituloExperiencia"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginEnd="20dp"
+                            android:gravity="center_horizontal"
+                            android:text="subtitulo"
+                            android:textColor="@color/white"
+                            android:textSize="25dp"></TextView>
+                        <ScrollView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:id="@+id/txtParrafoExperiencia"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="20dp"
+                                    android:layout_marginTop="15dp"
+                                    android:layout_marginEnd="20dp"
+                                    android:layout_marginBottom="20dp"
+                                    android:gravity="center_horizontal"
+                                    android:text="parrafo resumen"
+                                    android:textColor="@color/white"
+                                    android:textSize="20dp"></TextView>
+                            </LinearLayout>
+
+                        </ScrollView>
+
+                    </LinearLayout>
+                </androidx.core.widget.NestedScrollView>
             </LinearLayout>
+
 
         </androidx.cardview.widget.CardView>
 

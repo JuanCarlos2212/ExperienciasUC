@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.experienciasuc.MainActivity;
 import com.example.experienciasuc.R;
 import com.example.experienciasuc.ui.fragment_plan_estudios;
@@ -27,15 +28,17 @@ public class CarrerasAdapter extends RecyclerView.Adapter<CarrerasAdapter.Carrer
     List<Carreras> listaCarreras;
 
     private View.OnClickListener listener;
-
+    Context context;
 
     @Override
     public void onClick(View view) {
 
     }
-    public CarrerasAdapter(List<Carreras> listaCarreras){
+    public CarrerasAdapter(List<Carreras> listaCarreras, Context context){
         this.listaCarreras = listaCarreras;
+        this.context = context;
     }
+
 
     @NonNull
     @Override
@@ -56,11 +59,12 @@ public class CarrerasAdapter extends RecyclerView.Adapter<CarrerasAdapter.Carrer
     @Override
     public void onBindViewHolder(@NonNull CarrerasHolder holder, int position) {
 
-        String planstudios ;
+        String planstudios,rutaimagen ;
         Integer tidcarrera;
         holder.txtnombre.setText(listaCarreras.get(position).getNombre());
         planstudios = listaCarreras.get(position).getPlan_estudios();
         tidcarrera = listaCarreras.get(position).getIdcarrera();
+        rutaimagen = listaCarreras.get(position).getRutaimagen();
 
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -85,10 +89,16 @@ public class CarrerasAdapter extends RecyclerView.Adapter<CarrerasAdapter.Carrer
             }
         });
 
-        if(listaCarreras.get(position).getImagen() != null)
-            holder.imgCarrera.setImageBitmap(listaCarreras.get(position).getImagen());
-        else
-            holder.imgCarrera.setImageResource(R.drawable.img_base);
+//        if(listaCarreras.get(position).getImagen() != null)
+//            holder.imgCarrera.setImageBitmap(listaCarreras.get(position).getImagen());
+//        else
+//            holder.imgCarrera.setImageResource(R.drawable.img_base);
+
+
+
+        Glide.with(context)
+                .load(rutaimagen)
+                .into(holder.imgCarrera);
 
     }
 

@@ -8,6 +8,7 @@ public class Carreras {
     private Integer idcarrera;
     private String nombre;
     private String descripcion;
+    private String rutaimagen;
     private Bitmap imagen;
     private Integer numeroCiclos;
 
@@ -16,10 +17,11 @@ public class Carreras {
     public Carreras() {
     }
 
-    public Carreras(Integer idcarrera, String nombre, String descripcion, Bitmap imagen, Integer numeroCiclos, String plan_estudios) {
+    public Carreras(Integer idcarrera, String nombre, String descripcion, String rutaimagen, Bitmap imagen, Integer numeroCiclos, String plan_estudios) {
         this.idcarrera = idcarrera;
         this.nombre = nombre;
         this.descripcion = descripcion;
+        this.rutaimagen = rutaimagen;
         this.imagen = imagen;
         this.numeroCiclos = numeroCiclos;
         this.plan_estudios = plan_estudios;
@@ -102,12 +104,21 @@ public class Carreras {
 
     }
 
+    public String getRutaimagen() {
+        return rutaimagen;
+    }
+
+    public void setRutaimagen(String rutaimagen) {
+        this.rutaimagen = rutaimagen;
+    }
+
     @Override
     public String toString() {
         return "Carreras{" +
                 "idcarrera=" + idcarrera +
                 ", nombre='" + nombre + '\'' +
                 ", descripcion='" + descripcion + '\'' +
+                ", rutaimagen='" + rutaimagen + '\'' +
                 ", imagen=" + imagen +
                 ", numeroCiclos=" + numeroCiclos +
                 ", plan_estudios='" + plan_estudios + '\'' +

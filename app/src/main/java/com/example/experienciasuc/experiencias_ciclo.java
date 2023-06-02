@@ -145,6 +145,7 @@ public class experiencias_ciclo extends AppCompatActivity implements Response.Li
             @Override
             public void onResponse(JSONArray response) {
 
+
                 BtnExperiencias experiencia = null;
                 progreso.hide();
 
@@ -154,15 +155,17 @@ public class experiencias_ciclo extends AppCompatActivity implements Response.Li
 
                         JSONObject jsonObject = null;
                         jsonObject = response.getJSONObject(i);
-                        int inicio=jsonObject.getInt("ciclo_inicio");
-                        int fin=jsonObject.getInt("ciclo_fin");
+                      //int inicio=jsonObject.getInt("ciclo_inicio");
+                     // int fin=jsonObject.getInt("ciclo_fin");
 
+                        experiencia.setInicio(jsonObject.getInt("ciclo_inicio"));
+                        experiencia.setFin(jsonObject.getInt("ciclo_fin"));
                         experiencia.setNombre_categoria(jsonObject.getString("nombre_categoria"));
                         experiencia.setDataImagenIcon(jsonObject.getString("icono_categoria_blob"));
                         experiencia.setId_experiencia(jsonObject.getInt("id_experiencia"));
 
 
-                       if ( idCiclo>= inicio &&  idCiclo<= fin) {
+                       if ( idCiclo>= experiencia.getInicio()   &&  idCiclo<= experiencia.getFin()) {
                             listExperiencia.add(experiencia);
                         }
                     }

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="340dp"
+    app:cardCornerRadius="20dp"
+    android:orientation="vertical"
+    android:layout_margin="10dp"
+    android:gravity="center"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Horario de Atencion"
+                android:textSize="22sp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_marginTop="16dp"/>
+            <TextView
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Lunes a Viernes"
+                android:textSize="19sp"
+                android:textColor="@color/black"
+                android:gravity="center"/>
+            <TextView
+                android:layout_margin="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="8:00 AM - 1:00 PM\n3:00 PM - 6:00 PM"
+                android:textSize="17sp"
+                android:gravity="center"/>
+            <TextView
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sabados"
+                android:textSize="19sp"
+                android:textColor="@color/black"
+                android:gravity="center"/>
+            <TextView
+                android:layout_margin="10sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="9:00 AM - 1:00 PM"
+                android:textSize="17sp"
+                android:gravity="center"/>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnAceptardialog"
+                android:layout_width="200dp"
+                android:layout_margin="20dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:text="Aceptar"
+                android:textColor="@color/white"
+                android:background="@drawable/degradado_boton_horizontal"/>
+        </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>

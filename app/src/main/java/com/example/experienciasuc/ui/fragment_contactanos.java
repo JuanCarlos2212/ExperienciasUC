@@ -1,6 +1,10 @@
 package com.example.experienciasuc.ui;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -10,11 +14,14 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.experienciasuc.ContactoFormulario;
 import com.example.experienciasuc.R;
 import android.content.pm.PackageManager;
+
+import java.util.Calendar;
 
 public class fragment_contactanos extends Fragment {
 
@@ -49,7 +56,7 @@ public class fragment_contactanos extends Fragment {
         cardReunion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Muy pronto estará disponible", Toast.LENGTH_SHORT).show();
+                abrirSalaMeet();
             }
         });
         cardFormulario.setOnClickListener(new View.OnClickListener() {
@@ -77,6 +84,65 @@ public class fragment_contactanos extends Fragment {
 //        } else {
 //            Toast.makeText(getContext(), "Instale WhatsApp en este dispositivo", Toast.LENGTH_LONG).show();
 //        }
+    }
+    private void abrirSalaMeet() {
+        // Obtenemos la hora actual y minutos actuales
+        Calendar calendar = Calendar.getInstance();
+        int horaActual = calendar.get(Calendar.HOUR_OF_DAY);
+        int minutosActuales = calendar.get(Calendar.MINUTE);
+
+        // Verificar si está dentro del horario de atención
+        if (horaActual >= 8 && horaActual < 11) {
+            // url de la sala de 8 a 1
+            String url = "https://meet.google.com/dan-bcvy-bbi";
+
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse(url));
+            startActivity(intent);
+        }//limite de horario debe de probenir de la base de datos
+        else if (horaActual >= 15 && horaActual < 18) {
+            // url de la sala de 3 a 6
+            String url = "https://meet.google.com/dan-bcvy-bbi";
+
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse(url));
+            startActivity(intent);
+        } else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+
+            // Establecemos el diseño personalizado del dialog
+            View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_advertencia_atencion, null);
+            builder.setView(view);
+            Button btnSiguienteContactanos = view.findViewById(R.id.btnsiguienteContactanos);
+            AlertDialog dialog = builder.create();
+            //linea 119 hace de que se ponga transparente el fondo para mostrar el corner del dialog personalizado
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.show();
+
+            btnSiguienteContactanos.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss(); // Cerramos el primer dialog
+
+                    AlertDialog.Builder secondBuilder = new AlertDialog.Builder(getContext());
+                    View secondView = LayoutInflater.from(getContext()).inflate(R.layout.dialog_horario_atencion, null);
+                    secondBuilder.setView(secondView);
+
+                    // Crear y mostrar el segundo diálogo
+                    AlertDialog secondDialog = secondBuilder.create();
+                    secondDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    secondDialog.show();
+
+                    Button btnAceptar = secondView.findViewById(R.id.btnAceptardialog);
+                    btnAceptar.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            secondDialog.dismiss(); // Cerrar el segundo diálogo
+                        }
+                    });
+                }
+            });
+        }
     }
 
 }
