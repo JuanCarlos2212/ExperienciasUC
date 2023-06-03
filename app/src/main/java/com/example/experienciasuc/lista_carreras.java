@@ -5,10 +5,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -41,6 +44,9 @@ public class lista_carreras extends AppCompatActivity implements Response.Listen
     JsonArrayRequest jsonArrayRequest;
     ImageView btnvolver;
 
+    TextView txtNombreSedeListSede;
+    SharedPreferences sharedPreferences;
+
     public lista_carreras() {
         // Required empty public constructor
     }
@@ -48,6 +54,12 @@ public class lista_carreras extends AppCompatActivity implements Response.Listen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_carreras);
+
+        txtNombreSedeListSede= findViewById(R.id.txtNombreSedeListSede);
+//Recibimos por Shared el nombre de la carrera
+        sharedPreferences = lista_carreras.this.getSharedPreferences("PreferSede", lista_carreras.this.MODE_PRIVATE);//inicializacion global
+        String nombreSede = sharedPreferences.getString("keyNombreSede", "No encontrado");
+        txtNombreSedeListSede.setText("Sede "+ nombreSede);
 //
 //
 //        listaCarreras = new ArrayList<>();
@@ -86,8 +98,12 @@ public class lista_carreras extends AppCompatActivity implements Response.Listen
         progreso = new ProgressDialog(this);
         progreso.setMessage("Buscando Carreras");
         progreso.show();
+        //shared para el idsede
+        Integer idSede = sharedPreferences.getInt("idSede", 2);
+        String idSedeStr = idSede.toString();
+
 //        String url = "http://192.168.0.21/ExperienciasUC/ConsutlarListaCarreras_copia.php" ;
-        String url = Utilidades.RUTA + "listarCarreras" ;
+        String url = Utilidades.RUTA + "listarCarreraSedeMovil?id_sede=" + idSedeStr ;
 //        jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, this, this);
 //        requestQueue.add(jsonObjectRequest);
 
@@ -104,11 +120,11 @@ public class lista_carreras extends AppCompatActivity implements Response.Listen
                         JSONObject jsonObject = null;
                         jsonObject = response.getJSONObject(i);
 
-                        carreras.setIdcarrera(jsonObject.getInt("Id"));
-                        carreras.setNombre(jsonObject.getString("Nombre"));
-                        carreras.setDataImagen(jsonObject.getString("Imagen"));
-                        carreras.setPlan_estudios(jsonObject.getString("PlanEstudios"));
-                        carreras.setRutaimagen(jsonObject.getString("Ruta"));
+                        carreras.setIdcarrera(jsonObject.getInt("id_carrera"));
+                        carreras.setNombre(jsonObject.getString("nombre_carrera"));
+//                        carreras.setDataImagen(jsonObject.getString("Imagen"));
+                        carreras.setPlan_estudios(jsonObject.getString("plan_estudios_carrera"));
+                        carreras.setRutaimagen(jsonObject.getString("imagen_carrera"));
 
                         listaCarreras.add(carreras);
                     }

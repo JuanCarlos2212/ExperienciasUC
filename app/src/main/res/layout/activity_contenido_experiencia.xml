@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -6,9 +5,9 @@
     android:layout_height="match_parent"
     android:id="@+id/scrollViewNuevoContenido"
     ><LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -20,7 +19,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cardview_arriba"
             android:layout_width="match_parent"
-            android:layout_height="450dp"
+            android:layout_height="480dp"
             app:layout_constraintBottom_toTopOf="@id/cardview_abajo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -31,7 +30,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:visibility="gone"></WebView>
-
             <ImageView
                 android:id="@+id/ivContenidoExperiencia"
                 android:layout_width="match_parent"
@@ -56,7 +54,6 @@
             app:cardCornerRadius="8dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-
             <ImageView
                 android:id="@+id/full"
                 android:layout_width="40dp"
@@ -80,7 +77,6 @@
                 android:background="#7E00C1"
                 android:src="@drawable/ic_back_white"></ImageView>
         </androidx.cardview.widget.CardView>
-
         <TextView
             android:id="@+id/txtTituloExperiencia"
             android:layout_width="wrap_content"
@@ -98,12 +94,10 @@
 
 
             />
-
         <androidx.cardview.widget.CardView
             android:id="@+id/cardview_abajo"
             android:layout_width="match_parent"
             android:layout_height="350dp"
-
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -137,7 +131,7 @@
                             android:layout_height="wrap_content">
                             <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
                                 android:orientation="vertical">
                                 <TextView
                                     android:id="@+id/txtParrafoExperiencia"
@@ -152,7 +146,6 @@
                                     android:textColor="@color/white"
                                     android:textSize="20dp"></TextView>
                             </LinearLayout>
-
                         </ScrollView>
 
                     </LinearLayout>
@@ -164,6 +157,6 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </LinearLayout>
+</LinearLayout>
 
 </ScrollView>

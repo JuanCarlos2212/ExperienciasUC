@@ -1,5 +1,6 @@
 package com.example.experienciasuc.ui;
 
+import android.animation.ObjectAnimator;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -8,7 +9,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.LinearInterpolator;
 import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -56,10 +60,12 @@ public class fragment_lista_ciclos extends Fragment {
     JsonArrayRequest jsonArrayRequest;
     JsonArrayRequest jsonArrayRequest2;
 
+    SharedPreferences sharedPreferences, sharedPreferencesSedes;
+
 
     ProgressBar progressBar;
 
-
+    TextView tvNombreCarreraCiclos;
     public fragment_lista_ciclos() {
         // Required empty public constructor
     }
@@ -78,6 +84,7 @@ public class fragment_lista_ciclos extends Fragment {
         lista_Ciclos = new ArrayList<>();
         listaBarraProgreso = new ArrayList<>();
 
+
         recycleCiclos = vista.findViewById(R.id.recyclerCiclos);
         recycleCiclos.setLayoutManager(new LinearLayoutManager(getContext()));
         recycleCiclos.setHasFixedSize(true);
@@ -92,32 +99,17 @@ public class fragment_lista_ciclos extends Fragment {
         recycleBarraProgreso.setHasFixedSize(true);
 
 
-//        progressBar = vista.findViewById(R.id.progressBar6);
+        sharedPreferences= requireContext().getSharedPreferences("MiPref", getContext().MODE_PRIVATE);
+        sharedPreferencesSedes= requireContext().getSharedPreferences("ImgCiclo", getContext().MODE_PRIVATE);
 
 
-
+        String nombreCarreraenCiclos = sharedPreferences.getString("keynombreCarrera","Error Indefinido");
+        tvNombreCarreraCiclos = vista.findViewById(R.id.tvNombreCarreraCiclos);
+        tvNombreCarreraCiclos.setText(nombreCarreraenCiclos);
         cargarListaCiclos();
 
         cargarListaBarraProgreso();
 
-
-
-//        recycleCiclos.addOnScrollListener(new RecyclerView.OnScrollListener() {
-//            @Override
-//            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-//                super.onScrolled(recyclerView, dx, dy);
-//
-//                // Calculate the percentage of the list that has been scrolled
-//                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
-//                int visibleItemCount = layoutManager.getChildCount();
-//                int totalItemCount = layoutManager.getItemCount();
-//                int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
-//                int percentage = (int) (((float) (firstVisibleItemPosition + visibleItemCount) / totalItemCount) * 100);
-//
-//                // Update the progress bar with the percentage
-//                progressBar.setProgress(percentage);
-//            }
-//        });
         recycleCiclos.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -130,23 +122,30 @@ public class fragment_lista_ciclos extends Fragment {
                 int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
                 int percentage = (int) (((float) (firstVisibleItemPosition + visibleItemCount) / totalItemCount) * 100);
 
-                // Actualizamos el progreso de cada ProgressBar en el RecyclerView "recycleBarraProgreso"
+                // Animamos el progreso de cada ProgressBar en el RecyclerView "recycleBarraProgreso"
                 for (int i = 0; i < recycleBarraProgreso.getChildCount(); i++) {
                     View itemView = recycleBarraProgreso.getChildAt(i);
                     ProgressBar progressBar = itemView.findViewById(R.id.pbListaCiclos);
-                    progressBar.setProgress(percentage);
+                    setProgressWithAnimation(progressBar, percentage);
                 }
             }
         });
         return vista;
 
     }
+    private void setProgressWithAnimation(ProgressBar progressBar, int progress) {
+        ObjectAnimator progressAnimator = ObjectAnimator.ofInt(progressBar, "progress", progressBar.getProgress(), progress);
+        progressAnimator.setDuration(1000); // Duración de la animación en milisegundos
+        progressAnimator.setInterpolator(new LinearInterpolator()); // Interpolador lineal para un crecimiento gradual
+        progressAnimator.start();
+    }
 
     private void cargarListaBarraProgreso() {
         progreso2 = new ProgressDialog(getContext());
         progreso2.setMessage("Buscando...");
         progreso2.show();
-        String url = Utilidades.RUTA + "barraCarrera?id_carrera=1";
+        Integer idCarrera = sharedPreferences.getInt("keytidcarrera",1);
+        String url = Utilidades.RUTA + "barraCarrera?id_carrera="+idCarrera;
 
         jsonArrayRequest2 = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
             @Override
@@ -184,7 +183,14 @@ public class fragment_lista_ciclos extends Fragment {
         progreso=new ProgressDialog(getContext());
         progreso.setMessage("Buscando ");
         progreso.show();
-        String url = Utilidades.RUTA+ "listarCiclos";
+
+
+        Integer idSede = sharedPreferencesSedes.getInt("idSede",1);
+        Integer idCarrera = sharedPreferences.getInt("keytidcarrera",1);
+
+        Toast.makeText(getContext(),"carrera "+ idCarrera+" sede: "+ idSede, Toast.LENGTH_SHORT).show();
+
+        String url = Utilidades.RUTA + "listarCiclosCarreras?id_carrera="+idCarrera+"&id_sede="+idSede;
 //        String url = Util.RUTA + "ConsultarListaCiclos.php";
 //        url=url.replace(" ","%20");
 //        jsonObjectRequest= new JsonObjectRequest(Request.Method.GET, url, null, this, this);
@@ -208,16 +214,14 @@ public class fragment_lista_ciclos extends Fragment {
                         JSONObject jsonObject= null;
                         jsonObject = response.getJSONObject(i);
 
-                        ciclos.setId_ciclo(jsonObject.getString("Id"));
-                        ciclos.setDataImagen(jsonObject.getString("Imagen"));
-                        ciclos.setDescripcion(jsonObject.getString("Tag"));
-                        ciclos.setRuta(jsonObject.getString("Imagen"));
-
+                        ciclos.setId_ciclo(jsonObject.getString("id_ciclo"));
+                        ciclos.setRuta(jsonObject.getString("ruta_ciclo"));
+                        ciclos.setDescripcion(jsonObject.getString("ciclo_tag"));
 
                         lista_Ciclos.add(ciclos);
 
                     }
-                    AdaptadorCiclos adapter = new AdaptadorCiclos(lista_Ciclos);
+                    AdaptadorCiclos adapter = new AdaptadorCiclos(getContext(),lista_Ciclos);
                     recycleCiclos.setAdapter(adapter);
                 }
                 catch (Exception e){e.printStackTrace();}

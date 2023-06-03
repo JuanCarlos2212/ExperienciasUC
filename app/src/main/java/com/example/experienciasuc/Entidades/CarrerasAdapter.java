@@ -59,22 +59,18 @@ public class CarrerasAdapter extends RecyclerView.Adapter<CarrerasAdapter.Carrer
     @Override
     public void onBindViewHolder(@NonNull CarrerasHolder holder, int position) {
 
-        String planstudios,rutaimagen ;
-        Integer tidcarrera;
+        String planstudios,rutaimagen,nombreCarrera ;
+        Integer idcarrera;
         holder.txtnombre.setText(listaCarreras.get(position).getNombre());
         planstudios = listaCarreras.get(position).getPlan_estudios();
-        tidcarrera = listaCarreras.get(position).getIdcarrera();
+        idcarrera = listaCarreras.get(position).getIdcarrera();
         rutaimagen = listaCarreras.get(position).getRutaimagen();
-
+        nombreCarrera = listaCarreras.get(position).getNombre();
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-
-//                Bundle enviardatos = new Bundle();
-//                enviardatos.putString("keyplanEstudios",planstudios);
-//                enviardatos.putString("keyDatosrazaperro", String.valueOf(holder.txtRaza.getText()));
                 Intent intent = new Intent(view.getContext(), MainActivity.class);
                 // Obtener la instancia de SharedPreferences
                 SharedPreferences sharedPreferences = holder.itemView.getContext().getSharedPreferences("MiPref", Context.MODE_PRIVATE);
@@ -82,6 +78,8 @@ public class CarrerasAdapter extends RecyclerView.Adapter<CarrerasAdapter.Carrer
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 // Guardar una variable
                 editor.putString("keyplanestudios", planstudios);
+                editor.putString("keynombreCarrera", nombreCarrera);
+                editor.putInt("keytidcarrera", idcarrera);
                 // Aplicar los cambios
                 editor.apply();
 //                intent.putExtras(enviardatos);

@@ -29,6 +29,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.example.experienciasuc.Entidades.BtnExperiencias;
 import com.example.experienciasuc.Entidades.BtnExperienciasAdapter;
 import com.example.experienciasuc.Entidades.CiclosGreen;
@@ -99,17 +100,11 @@ public class experiencias_ciclo extends AppCompatActivity implements Response.Li
         imagenCiclo=findViewById(R.id.imgCiclo);
 
         SharedPreferences sharedPreferences= getSharedPreferences("ImgCiclo", Context.MODE_PRIVATE);
-        String valor = sharedPreferences.getString("keyImagen","no esta agarrando");
+        String urlImagenCiclo = sharedPreferences.getString("keyImagenciclo","no esta agarrando");
 
-        try {
-
-            byte[] bytecode= Base64.decode(valor,Base64.DEFAULT);
-           Bitmap imagenNumero= BitmapFactory.decodeByteArray(bytecode,0,bytecode.length);
-           imagenCiclo.setImageBitmap(imagenNumero);
-        }
-        catch (Exception e){e.printStackTrace();}
-
-
+        Glide.with(this)
+                .load(urlImagenCiclo)
+                .into(imagenCiclo);
 
         SubirListaBotones();
     }
@@ -127,11 +122,6 @@ public class experiencias_ciclo extends AppCompatActivity implements Response.Li
       //  );
        // return (int)(anchuraPantalla / anchuraMinimaElemento);
    // }
-
-
-
-
-
 
 
     private void SubirListaBotones(){
