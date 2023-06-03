@@ -186,11 +186,10 @@ public class fragment_lista_ciclos extends Fragment {
 
 
         Integer idSede = sharedPreferencesSedes.getInt("idSede",1);
-        Integer idCarrera = sharedPreferences.getInt("keytidcarrera",1);
+        Integer idCarrera = sharedPreferences.getInt("keyt idcarrera",1);
 
-        Toast.makeText(getContext(),"carrera "+ idCarrera+" sede: "+ idSede, Toast.LENGTH_SHORT).show();
 
-        String url = Utilidades.RUTA + "listarCiclosCarreras?id_carrera="+idCarrera+"&id_sede="+idSede;
+        String url = Utilidades.RUTA + "cicloACicloMovil?id_carrera=13";
 //        String url = Util.RUTA + "ConsultarListaCiclos.php";
 //        url=url.replace(" ","%20");
 //        jsonObjectRequest= new JsonObjectRequest(Request.Method.GET, url, null, this, this);

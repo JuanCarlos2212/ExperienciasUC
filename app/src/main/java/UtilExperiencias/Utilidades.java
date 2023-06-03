@@ -7,6 +7,7 @@ public class Utilidades {
 
 //ruta servidor oracle
     public static final String RUTA="http://144.22.45.179:9000/api/";
+//    public static final String RUTA="https://virtserver.swaggerhub.com/CristianBlaz18/APIS/1.0.0/api/";
 
 
 }

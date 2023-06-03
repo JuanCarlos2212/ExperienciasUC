@@ -82,6 +82,7 @@ public class SedeAdapter extends RecyclerView.Adapter<SedeAdapter.CampusHolder> 
                 v.getContext().startActivity(intent);
 
 
+
             }
         });
 
