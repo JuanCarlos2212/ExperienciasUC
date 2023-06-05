@@ -55,30 +55,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.293" />
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:src="@drawable/logouc"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/contenidoPresentacion"
-        app:layout_constraintVertical_bias="0.855"/>
-
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/animationView"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        app:lottie_rawRes="@raw/swipe_right_to_left"
-        android:layout_marginTop="408dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView3"
+        android:layout_marginTop="512dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
+        app:lottie_rawRes="@raw/swipe_right_to_left"
         app:lottie_repeatCount="2"
         app:lottie_speed="0.5" />
 

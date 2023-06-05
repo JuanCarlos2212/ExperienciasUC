@@ -20,10 +20,11 @@
 
             <TextView
                 android:id="@+id/Nombre_carrera"
-                android:layout_width="315dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="3dp"
+                android:layout_weight="1"
                 android:gravity="center"
                 android:text="Ingenieria de Sistemas e Informatica"
                 android:textColor="@color/black"
@@ -34,9 +35,11 @@
                 android:id="@+id/ic_regresar"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_gravity="center"
+                android:layout_marginRight="14dp"
+                android:layout_gravity="end|center_vertical"
                 android:src="@drawable/ic_regresar" />
         </LinearLayout>
+
 
 
     </LinearLayout>

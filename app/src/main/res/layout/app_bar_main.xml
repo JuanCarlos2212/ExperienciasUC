@@ -16,7 +16,19 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/black"
-            app:popupTheme="@style/Theme.ExperienciasUC.PopupOverlay" />
+            app:popupTheme="@style/Theme.ExperienciasUC.PopupOverlay">
+
+            <!-- Botón de acción agregado aun sin funcionalidad-->
+            <ImageButton
+                android:id="@+id/btnAction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_back_white"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:layout_gravity="end|center_horizontal"
+                android:layout_marginRight="20dp"/>
+        </androidx.appcompat.widget.Toolbar>
+
 
     </com.google.android.material.appbar.AppBarLayout>
 

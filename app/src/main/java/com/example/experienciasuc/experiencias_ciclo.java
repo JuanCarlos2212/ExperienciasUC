@@ -35,6 +35,7 @@ import com.example.experienciasuc.Entidades.BtnExperienciasAdapter;
 import com.example.experienciasuc.Entidades.CiclosGreen;
 import com.example.experienciasuc.R;
 import android.graphics.Bitmap;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -62,6 +63,9 @@ public class experiencias_ciclo extends AppCompatActivity implements Response.Li
 
     ImageView imagenCiclo, btnvolver;
 
+    SharedPreferences sharedPreferences, sharedPreferencesSedes;
+    TextView Nombre_carrera;
+
     int idCiclo;
 
     //private RecyclerView.LayoutManager mLayoutMager;
@@ -75,12 +79,19 @@ public class experiencias_ciclo extends AppCompatActivity implements Response.Li
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_experiencias_ciclo);
 
+        Nombre_carrera = findViewById(R.id.Nombre_carrera);
+
         listExperiencia = new ArrayList<>();
         recyclerExperiencia = findViewById(R.id.recyclerExperiencias);
         recyclerExperiencia.setLayoutManager(new LinearLayoutManager(this));
         recyclerExperiencia.setHasFixedSize(true);
         btnvolver = findViewById(R.id.ic_regresar);
 
+        sharedPreferences= experiencias_ciclo.this.getSharedPreferences("MiPref", experiencias_ciclo.this.MODE_PRIVATE);
+        sharedPreferencesSedes= experiencias_ciclo.this.getSharedPreferences("PreferSede", experiencias_ciclo.this.MODE_PRIVATE);
+
+        String nomCarrera = sharedPreferences.getString("keynombreCarrera","error al cargar nombre");;
+        Nombre_carrera.setText(nomCarrera);
         btnvolver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,8 +110,8 @@ public class experiencias_ciclo extends AppCompatActivity implements Response.Li
 
         imagenCiclo=findViewById(R.id.imgCiclo);
 
-        SharedPreferences sharedPreferences= getSharedPreferences("ImgCiclo", Context.MODE_PRIVATE);
-        String urlImagenCiclo = sharedPreferences.getString("keyImagenciclo","no esta agarrando");
+        SharedPreferences sharedPreferencesimgCiclo= getSharedPreferences("ImgCiclo", Context.MODE_PRIVATE);
+        String urlImagenCiclo = sharedPreferencesimgCiclo.getString("keyImagenciclo","no esta agarrando");
 
         Glide.with(this)
                 .load(urlImagenCiclo)
@@ -128,7 +139,11 @@ public class experiencias_ciclo extends AppCompatActivity implements Response.Li
         progreso =new ProgressDialog(this);
         progreso.setMessage("Buscando Experiencias");
         progreso.show();
-        String url = Utilidades.RUTA + "llamarBotonExp?id_carrera=1&id_sede=1";
+
+        Integer idSede = sharedPreferencesSedes.getInt("idSede",1);
+        Integer idCarrera = sharedPreferences.getInt("keytidcarrera",1);
+        String url = Utilidades.RUTA + "llamarBotonExp?id_carrera="+idCarrera+"&id_sede="+idSede;
+
 //        jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,this,this);
 //        requestQueue.add(jsonObjectRequest);
         jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
