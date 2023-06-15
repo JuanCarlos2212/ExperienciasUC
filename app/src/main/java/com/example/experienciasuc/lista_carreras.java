@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -84,8 +85,9 @@ public class lista_carreras extends AppCompatActivity implements Response.Listen
 
         btnvolver.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                onBackPressed();
+            public void onClick(View view) {
+                Intent intent = new Intent(lista_carreras.this,lista_campus.class);
+                startActivity(intent);
             }
         });
 

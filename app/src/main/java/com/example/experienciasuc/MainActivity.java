@@ -1,9 +1,11 @@
 package com.example.experienciasuc;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Menu;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -25,6 +27,7 @@ import com.example.experienciasuc.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
+    ImageButton btnActionBarBack;
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
 
@@ -34,7 +37,15 @@ public class MainActivity extends AppCompatActivity {
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        btnActionBarBack = findViewById(R.id.btnActionBarBack);
 
+        btnActionBarBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,lista_carreras.class);
+                startActivity(intent);
+            }
+        });
         setSupportActionBar(binding.appBarMain.toolbar);
         //binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
             //@Override
