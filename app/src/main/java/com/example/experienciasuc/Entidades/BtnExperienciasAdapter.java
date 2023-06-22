@@ -55,8 +55,8 @@ public class BtnExperienciasAdapter extends RecyclerView.Adapter<BtnExperiencias
     public void onBindViewHolder(@NonNull ExperienciaHolder holder, int position) {
 
         Integer id_experiencia2;
-        String texto1 = "Inicia en: ";
-        String texto2 = "Termina en: ";
+        String texto1 = "Vive tu experiencia desde el ciclo: ";
+        String texto2 = "al ";
         int ini;
         int f;
         ini = listExperiencias.get(position).getInicio();
