@@ -89,6 +89,7 @@
             android:text="tituloPrincipal"
             android:textColor="@color/white"
             android:textSize="25dp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@id/cardview_arriba"
             app:layout_constraintStart_toStartOf="parent"
 
