@@ -81,7 +81,6 @@ public class BtnExperienciasAdapter extends RecyclerView.Adapter<BtnExperiencias
                 // Guardar una variable
                 editor.putInt("keyidExperiencia",id_experiencia2);
                 editor.apply();
-                Toast.makeText(view.getContext(), id_experiencia2.toString(), Toast.LENGTH_SHORT).show();
 
             }
         });
