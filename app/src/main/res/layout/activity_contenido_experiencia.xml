@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/scrollViewNuevoContenido"
-    ><LinearLayout
+    >
+    <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -16,35 +17,16 @@
         tools:context=".ContenidoExperienciaNew">
 
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardview_arriba"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_slider_contenido"
             android:layout_width="match_parent"
             android:layout_height="480dp"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@id/cardview_abajo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-
-            <WebView
-                android:id="@+id/wvContenidoExperiencia"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="gone"></WebView>
-            <ImageView
-                android:id="@+id/ivContenidoExperiencia"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:visibility="gone"/>
-
-            <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
-                android:id="@+id/ypvContenidoExperiencia"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="gone"/>
-
-        </androidx.cardview.widget.CardView>
-
+        </androidx.recyclerview.widget.RecyclerView>
 
 
         <androidx.cardview.widget.CardView
@@ -89,7 +71,7 @@
             android:text="tituloPrincipal"
             android:textColor="@color/white"
             android:textSize="25dp"
-            app:layout_constraintBottom_toBottomOf="@id/cardview_arriba"
+            app:layout_constraintBottom_toBottomOf="@id/rv_slider_contenido"
             app:layout_constraintStart_toStartOf="parent"
 
 
@@ -101,7 +83,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardview_arriba">
+            app:layout_constraintTop_toBottomOf="@id/rv_slider_contenido">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

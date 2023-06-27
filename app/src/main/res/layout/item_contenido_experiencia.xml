@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+        <androidx.cardview.widget.CardView
+        android:id="@+id/cardview_arriba"
+        android:layout_width="match_parent"
+        android:layout_height="480dp">
+
+
+        <WebView
+            android:id="@+id/wvContenidoExperiencia"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"></WebView>
+        <ImageView
+            android:id="@+id/ivContenidoExperiencia"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:visibility="gone"/>
+
+        <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+            android:id="@+id/ypvContenidoExperiencia"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"/>
+
+    </androidx.cardview.widget.CardView>
+
+
+</LinearLayout>
