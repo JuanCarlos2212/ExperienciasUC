@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.experienciasuc.ContenidoExperiencia;
 import com.example.experienciasuc.R;
 import com.example.experienciasuc.experiencias_ciclo;
@@ -25,13 +26,16 @@ public class BtnExperienciasAdapter extends RecyclerView.Adapter<BtnExperiencias
 
     private View.OnClickListener listener;
 
-
+    Context context;
     @Override
     public void onClick(View view) {
 
     }
 
-    public BtnExperienciasAdapter(List<BtnExperiencias> listExperiencias) {this.listExperiencias = listExperiencias; }
+    public BtnExperienciasAdapter(List<BtnExperiencias> listExperiencias, Context context) {
+        this.listExperiencias = listExperiencias;
+        this.context=context;
+    }
 
 
     @NonNull
@@ -55,10 +59,12 @@ public class BtnExperienciasAdapter extends RecyclerView.Adapter<BtnExperiencias
     public void onBindViewHolder(@NonNull ExperienciaHolder holder, int position) {
 
         Integer id_experiencia2;
-        String texto1 = "Inicia en: ";
-        String texto2 = "Termina en: ";
+        String rutaimagen;
+        String texto1 = "Vive la experiencia desde el ciclo";
+        String texto2 = "al ";
         int ini;
         int f;
+        rutaimagen=listExperiencias.get(position).getIcono_categoria();
         ini = listExperiencias.get(position).getInicio();
         f=listExperiencias.get(position).getFin();
         String textoCombinado = texto1 + " " + ini + " "+ texto2+ " "+ f;
@@ -75,7 +81,6 @@ public class BtnExperienciasAdapter extends RecyclerView.Adapter<BtnExperiencias
                 // Guardar una variable
                 editor.putInt("keyidExperiencia",id_experiencia2);
                 editor.apply();
-                Toast.makeText(view.getContext(), id_experiencia2.toString(), Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -86,11 +91,14 @@ public class BtnExperienciasAdapter extends RecyclerView.Adapter<BtnExperiencias
 
         holder.nombre_categria.setText(listExperiencias.get(position).getNombre_categoria());
 
-        if(listExperiencias.get(position).getIcono_categoria_blob() != null)
-            holder.ImgIcono.setImageBitmap(listExperiencias.get(position).getIcono_categoria_blob());
-        else
-            holder.ImgIcono.setImageResource(R.drawable.img_base);
+        //if(listExperiencias.get(position).getIcono_categoria_blob() != null)
+          //  holder.ImgIcono.setImageBitmap(listExperiencias.get(position).getIcono_categoria_blob());
+       // else
+         //   holder.ImgIcono.setImageResource(R.drawable.img_base);
         holder.text.setText(textoCombinado);
+        Glide.with(context)
+                .load(rutaimagen)
+                .into(holder.ImgIcono);
     }
 
     @Override

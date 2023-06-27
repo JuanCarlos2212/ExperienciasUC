@@ -166,7 +166,7 @@ public class experiencias_ciclo extends AppCompatActivity implements Response.Li
                         experiencia.setInicio(jsonObject.getInt("ciclo_inicio"));
                         experiencia.setFin(jsonObject.getInt("ciclo_fin"));
                         experiencia.setNombre_categoria(jsonObject.getString("nombre_categoria"));
-                        experiencia.setDataImagenIcon(jsonObject.getString("icono_categoria_blob"));
+                        experiencia.setIcono_categoria(jsonObject.getString("icono_categoria"));
                         experiencia.setId_experiencia(jsonObject.getInt("id_experiencia"));
 
 
@@ -174,7 +174,7 @@ public class experiencias_ciclo extends AppCompatActivity implements Response.Li
                             listExperiencia.add(experiencia);
                         }
                     }
-                    BtnExperienciasAdapter adapter = new BtnExperienciasAdapter(listExperiencia);
+                    BtnExperienciasAdapter adapter = new BtnExperienciasAdapter(listExperiencia,experiencias_ciclo.this);
                     recyclerExperiencia.setAdapter(adapter);
 
                 }catch (Exception e){ e.printStackTrace();}
