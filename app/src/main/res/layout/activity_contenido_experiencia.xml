@@ -106,7 +106,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/fondo_contenido">
+                android:background="@color/white">
                 <androidx.core.widget.NestedScrollView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
@@ -133,6 +133,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical">
+
                                 <TextView
                                     android:id="@+id/txtParrafoExperiencia"
                                     android:layout_width="match_parent"
@@ -143,8 +144,9 @@
                                     android:layout_marginBottom="20dp"
                                     android:gravity="center_horizontal"
                                     android:text="parrafo resumen"
-                                    android:textColor="@color/white"
-                                    android:textSize="20dp"></TextView>
+                                    android:textColor="@color/black"
+                                    android:textSize="20dp"
+                                    android:background="@drawable/borde"></TextView>
                             </LinearLayout>
                         </ScrollView>
 

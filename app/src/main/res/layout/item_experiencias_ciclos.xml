@@ -41,7 +41,7 @@
                 android:id="@+id/fondo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/degradado_boton"
+                android:background="@drawable/press_cambio"
                 android:gravity="center"
                 tools:layout_editor_absoluteX="-49dp"
                 tools:layout_editor_absoluteY="0dp"
@@ -108,7 +108,7 @@
                             android:gravity="center"
                             android:text="Nombre de Experiencia"
                             android:textColor="#AAAAAA"
-                            android:textSize="10sp"
+                            android:textSize="14sp"
                             android:textStyle="bold">
                         </TextView>
                     </LinearLayout>
