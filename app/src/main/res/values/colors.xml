@@ -17,4 +17,10 @@
     <color name="ocho">#F87373</color>
     <color name="nueve">#FE8673</color>
     <color name="dies">#63FCCA</color>
+
+    <color name="iniciio">#005075</color>
+    <color name="fin">#930029</color>
+
+    <color name="dialog">#BF4137C8</color>
+
 </resources>

@@ -3,9 +3,12 @@ package com.example.experienciasuc.Entidades;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,10 +16,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.experienciasuc.ContenidoExperiencia;
 import com.example.experienciasuc.MainActivity;
 import com.example.experienciasuc.R;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ContenidoExpAdapter extends RecyclerView.Adapter<ContenidoExpAdapter.ContenidoExpHolder> implements View.OnClickListener {
     List<ContenidoExp> listaContenidoExp;
@@ -26,7 +35,7 @@ public class ContenidoExpAdapter extends RecyclerView.Adapter<ContenidoExpAdapte
     public void onClick(View view) {
 
     }
-    public ContenidoExpAdapter(List<Carreras> listaCarreras, Context context){
+    public ContenidoExpAdapter(List<ContenidoExp> listaContenidoExp, Context context){
         this.listaContenidoExp = listaContenidoExp;
         this.context = context;
     }
@@ -42,47 +51,27 @@ public class ContenidoExpAdapter extends RecyclerView.Adapter<ContenidoExpAdapte
 
     public void onBindViewHolder(@NonNull ContenidoExpAdapter.ContenidoExpHolder holder, int position) {
 
-//        String urlcontenido, tipo contenido;
-//        String planstudios,rutaimagen,nombreCarrera ;
-//        Integer idcarrera;
-//        holder.urlcontenido.setText(listaContenidoExp).get(position).getUrlcontenido;
-//        holder.tipocontenido.setText(listaContenidoExp).get(position).getTipocontenido;
-////        holder.txtnombre.setText(listaContenidoExp.get(position).getNombre());
-//        planstudios = listaCarreras.get(position).getPlan_estudios();work
-//        idcarrera = listaCarreras.get(position).getIdcarrera();
-//        rutaimagen = listaCarreras.get(position).getRutaimagen();
-//        nombreCarrera = listaCarreras.get(position).getNombre();
+        String urlcontenido, tipocontenido;
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+//        int idExperiencia = listaContenidoExp.get(position).getId_experiencia();
 
-                Intent intent = new Intent(view.getContext(), MainActivity.class);
-                // Obtener la instancia de SharedPreferences
-                SharedPreferences sharedPreferences = holder.itemView.getContext().getSharedPreferences("MiPref", Context.MODE_PRIVATE);
-//                // Obtener el editor de SharedPreferences
-//                SharedPreferences.Editor editor = sharedPreferences.edit();
-//                // Guardar una variable
-//                editor.putString("keyplanestudios", planstudios);
-//                editor.putString("keynombreCarrera", nombreCarrera);
-//                editor.putInt("keytidcarrera", idcarrera);
-//                // Aplicar los cambios
-//                editor.apply();
-//                intent.putExtras(enviardatos);
-                view.getContext().startActivity(intent);
-            }
-        });
+        urlcontenido = listaContenidoExp.get(position).getUrlcontenido();
+        tipocontenido = listaContenidoExp.get(position).getTipocontenido();
 
-//        if(listaCarreras.get(position).getImagen() != null)
-//            holder.imgCarrera.setImageBitmap(listaCarreras.get(position).getImagen());
-//        else
-//            holder.imgCarrera.setImageResource(R.drawable.img_base);
+        holder.setTipocontenido(tipocontenido,urlcontenido);
 
 
+        // Remplazar boton Full
+//        holder.itemView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                Intent intent = new Intent(view.getContext(), MainActivity.class);
+//
+//                view.getContext().startActivity(intent);
+//            }
+//        });
 
-//        Glide.with(context)
-//                .load(rutaimagen)
-//                .into(holder.imgCarrera);
 
     }
 
@@ -94,13 +83,67 @@ public class ContenidoExpAdapter extends RecyclerView.Adapter<ContenidoExpAdapte
 
 
     public class ContenidoExpHolder extends RecyclerView.ViewHolder{
-        TextView txtidcarrera,txtnombre, txtciclo, txtdescripciion;
-        ImageView imgCarrera;
-        String planstudios,tidcarrera ;
+
+        String urlcontenido,tipocontenido ;
+
+        WebView webViewContenido;
+        YouTubePlayerView youTubePlayerViewContenido;
+        ImageView imageViewContenido;
 
 
         public ContenidoExpHolder(@NonNull View itemView) {
             super(itemView);
+
+            webViewContenido =itemView.findViewById(R.id.wvContenidoExperiencia);
+            youTubePlayerViewContenido = itemView.findViewById(R.id.ypvContenidoExperiencia);
+            imageViewContenido = itemView.findViewById(R.id.ivContenidoExperiencia);
         }
+
+        public void setTipocontenido(String tipocontenido, String urlcontenido){
+            switch (tipocontenido) {
+                case "imagen360":
+                    webViewContenido.setVisibility(View.VISIBLE);
+                    webViewContenido.getSettings().setJavaScriptEnabled(true);
+                    webViewContenido.loadUrl(urlcontenido);
+
+                    break;
+                case "video":
+                    youTubePlayerViewContenido.setVisibility(View.VISIBLE);
+//                    getLifecycle().addObserver(youTubePlayerViewContenido);
+                    ((ContenidoExperiencia) context).getLifecycle().addObserver(youTubePlayerViewContenido);
+
+
+                    youTubePlayerViewContenido.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
+                        @Override
+                        public void onReady(YouTubePlayer youTubePlayer) {
+                            String videoId = getYoutubeId(urlcontenido);
+                            youTubePlayer.loadVideo(videoId, 0);
+                            // Carga el video y lo reproduce automáticamente
+                        }
+                    });
+
+                    break;
+                case "imagen":
+
+                    imageViewContenido.setVisibility(View.VISIBLE);
+                    Glide.with(context).load(urlcontenido).into(imageViewContenido);
+
+                    break;
+            }
+        }
+    }
+
+    private String getYoutubeId(String videoUrl) {
+        String videoId = null;
+        if (videoUrl != null && videoUrl.trim().length() > 0 && (videoUrl.contains("youtube.com") || videoUrl.contains("youtu.be"))) {
+            String expression = "^.*((youtu.be\\/)|(v\\/)|(\\/u\\/\\w\\/)|(embed\\/)|(watch\\?))\\??v?=?([^#&?]*).*";
+            CharSequence input = videoUrl;
+            Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
+            Matcher matcher = pattern.matcher(input);
+            if (matcher.matches()) {
+                videoId = matcher.group(7);
+            }
+        }
+        return videoId;
     }
 }

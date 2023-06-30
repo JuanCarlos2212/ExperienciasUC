@@ -3,20 +3,32 @@ package com.example.experienciasuc;
 import static android.view.View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSnapHelper;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SnapHelper;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.LinearGradient;
+import android.graphics.Shader;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.method.ScrollingMovementMethod;
+import android.text.style.ForegroundColorSpan;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.WebView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +41,12 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+import com.daimajia.slider.library.SliderLayout;
+import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
+import com.example.experienciasuc.Entidades.AdaptadorCiclos;
+import com.example.experienciasuc.Entidades.CiclosGreen;
+import com.example.experienciasuc.Entidades.ContenidoExp;
+import com.example.experienciasuc.Entidades.ContenidoExpAdapter;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
@@ -37,70 +55,52 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import UtilExperiencias.Utilidades;
 
-public class ContenidoExperiencia extends AppCompatActivity {
 
+public class ContenidoExperiencia extends AppCompatActivity {
     ProgressDialog progreso;
+    ProgressDialog progreso2;
     RequestQueue requestQueue;
     JsonArrayRequest jsonArrayRequest;
     TextView txtTitulo, txtSubTitulo, txtParrafo;
+    SliderLayout imageSlider;
 
+    LinearLayout indicadorPuntos;
+
+    private List<ClipData.Item> itemList;
+
+    RecyclerView sliderContenido;
+    ArrayList<ContenidoExp> listContenidoExp;
     WebView webViewContenido;
     YouTubePlayerView youTubePlayerViewContenido;
-    ImageView imageViewContenido,btnFullScreen,btnvolver;
+    ImageView imageViewContenido, btnFullScreen, btnvolver;
     String id_experiencia;
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        // Oculta la barra de navegación
-//        View decorView = getWindow().getDecorView();
-//        int uiOptions = View.SYSTEM_UI_FLAG_LAYOUT_STABLE |
-//                SYSTEM_UI_FLAG_HIDE_NAVIGATION
-//                | View.SYSTEM_UI_FLAG_FULLSCREEN
-//                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
-//        decorView.setSystemUiVisibility(uiOptions);
-//        //------
-//        View decorView = getWindow().getDecorView();
-//        decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION |
-//                View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
-//        decorView.setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
-//            @Override
-//            public void onSystemUiVisibilityChange(int visibility) {
-//                if ((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) {
-//                    hideSystemUI();
-//                }
-//            }
-//        });
-//        hideSystemUI();
-
-
-
-
-
         setContentView(R.layout.activity_contenido_experiencia);
 
+        sliderContenido = findViewById(R.id.rv_slider_contenido);
+        listContenidoExp = new ArrayList<>();
+
+        // Configuración del LayoutManager
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        sliderContenido.setLayoutManager(layoutManager);
+        layoutManager.setSmoothScrollbarEnabled(true); // Para un desplazamiento más suave
+        sliderContenido.setHasFixedSize(true);
 
         txtTitulo = findViewById(R.id.txtTituloExperiencia);
         txtSubTitulo = findViewById(R.id.txtSubtituloExperiencia);
         txtParrafo = findViewById(R.id.txtParrafoExperiencia);
         txtParrafo.setMovementMethod(new ScrollingMovementMethod());
-//        ScrollView scrollView = findViewById(R.id.scrollViewNuevoContenido);
-//        scrollView.post(new Runnable() {
-//            @Override
-//            public void run() {
-//                scrollView.fullScroll(ScrollView.FOCUS_DOWN);
-//            }
-//        });
-
-        webViewContenido =findViewById(R.id.wvContenidoExperiencia);
-        youTubePlayerViewContenido = findViewById(R.id.ypvContenidoExperiencia);
-        imageViewContenido = findViewById(R.id.ivContenidoExperiencia);
 
         btnFullScreen = findViewById(R.id.full);
         btnvolver = findViewById(R.id.volverlistabotones);
@@ -114,14 +114,201 @@ public class ContenidoExperiencia extends AppCompatActivity {
 
         requestQueue = Volley.newRequestQueue(this);
 
-
-        SharedPreferences sharedPreferences= getSharedPreferences("id_experiencia", Context.MODE_PRIVATE);
-        int valor = sharedPreferences.getInt("keyidExperiencia",0);
+        SharedPreferences sharedPreferences = getSharedPreferences("id_experiencia", Context.MODE_PRIVATE);
+        int valor = sharedPreferences.getInt("keyidExperiencia", 0);
         id_experiencia = String.valueOf(valor);
 
-        consumirAPI();
+        SnapHelper snapHelper = new LinearSnapHelper();
+        snapHelper.attachToRecyclerView(sliderContenido);
+
+        ContenidoExpAdapter adapter = new ContenidoExpAdapter(listContenidoExp, ContenidoExperiencia.this);
+        sliderContenido.setAdapter(adapter);
+
+        ProgressBar pbCantidadExperiencias = findViewById(R.id.pbCantidadExperiencias);
+        sliderContenido.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                // Obtén el número total de elementos en la lista de datos
+                int totalItems = recyclerView.getAdapter().getItemCount();
+
+                // Obtén el número de elementos actualmente visibles en el RecyclerView
+                int itemsVisible = layoutManager.getChildCount();
+
+                // Obtén la posición del primer elemento visible
+                int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
+
+                // Calcula el progreso actual en función de los elementos visibles y el total
+                float progress = (firstVisibleItemPosition + itemsVisible) / (float) totalItems * 100;
+
+                // Aplica una interpolación lineal al progreso
+                float interpolatedProgress = Math.min(progress, 100);
+
+                // Actualiza la ProgressBar con el valor de progreso interpolado
+                pbCantidadExperiencias.setProgress((int) interpolatedProgress);
+            }
+        });
+
+
+// Obtén los colores de inicio y fin del degradado
+//        int colorInicio = getResources().getColor(R.color.iniciio);
+//        int colorFin = getResources().getColor(R.color.fin);
+//
+//// Crea un objeto LinearGradient para definir el degradado de colores
+//        LinearGradient gradient = new LinearGradient(
+//                0, 0, txtParrafo.getPaint().measureText(txtParrafo.getText().toString()), 0,
+//                colorInicio, colorFin,
+//                Shader.TileMode.CLAMP
+//        );
+//
+//// Aplica el LinearGradient al Shader del TextView
+//        txtParrafo.getPaint().setShader(gradient);
+        cargarContenidocomoTal();
+        cargarTextosContenido();
+    }
+
+
+    private void cargarContenidocomoTal() {
+
+
+        progreso2=new ProgressDialog(ContenidoExperiencia.this);
+        progreso2.setMessage("Buscando Contenidos... ");
+        progreso2.show();
+        String id= id_experiencia;
+
+        String url = Utilidades.RUTA+ "contenidoExperienciav2?id_experiencia="+ id;
+
+
+        jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+
+                ContenidoExp contenidoE = null;
+                progreso2.hide();
+
+//                JSONArray json = response.optJSONArray(0);
+//
+                try {
+                    for (int i=0;i<response.length();i++) {
+                        contenidoE = new ContenidoExp();
+
+                        JSONObject jsonObject= null;
+                        jsonObject = response.getJSONObject(i);
+
+
+                        contenidoE.setTipocontenido(jsonObject.getString("tipo_contenido"));
+                        contenidoE.setUrlcontenido(jsonObject.getString("ruta_contenido"));
+
+
+                        listContenidoExp.add(contenidoE);
+
+                        btnFullScreen.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent(ContenidoExperiencia.this, FullContenido.class);
+//                                intent.putExtra("ruta_contenido",urlcontenido);
+//                                intent.putExtra("tipo_contenido",tipocontenido);
+                                startActivity(intent);
+
+                            }
+                        });
+                    }
+                    ContenidoExpAdapter adapter = new ContenidoExpAdapter(listContenidoExp,ContenidoExperiencia.this);
+                    sliderContenido.setAdapter(adapter);
+//                    progreso2.dismiss();
+                }
+                catch (Exception e){e.printStackTrace();}
+
+            }
+        },new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.i("Error Voley", error.toString());
+            }
+        });
+        requestQueue.add(jsonArrayRequest);
 
     }
+
+    private void cargarTextosContenido() {
+
+
+            progreso=new ProgressDialog(this);
+            progreso.setMessage("Buscando Textos... ");
+            progreso.show();
+//
+
+            String id= id_experiencia;
+
+//        String url = Utilidades.RUTA+ "contenidoExperienciaMovil?id_experiencia="+ id;
+//            String url = Utilidades.RUTA+ "contenidoExperienciav2?id_experiencia="+ id;
+            String url = Utilidades.RUTA+ "textoExperiencia?id_experiencia="+ id;
+
+
+        jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+
+                ContenidoExp contenidoE = null;
+                progreso.hide();
+
+//                JSONArray json = response.optJSONArray(0);
+//
+                try {
+                    for (int i=0;i<response.length();i++) {
+                        contenidoE = new ContenidoExp();
+
+                        JSONObject jsonObject= null;
+                        jsonObject = response.getJSONObject(i);
+
+                        String titulo = jsonObject.getString("titulo");
+                        String subtitulo = jsonObject.getString("subtitulo");
+                        String parrafo = jsonObject.getString("parrafo");
+
+                        txtTitulo.setText(titulo);
+                        txtSubTitulo.setText(subtitulo);
+                        txtParrafo.setText(parrafo);
+
+
+                        contenidoE.setTipocontenido(jsonObject.getString("urlcontenido"));
+                        contenidoE.setUrlcontenido(jsonObject.getString("tipocontenido"));
+
+
+                        listContenidoExp.add(contenidoE);
+
+                        btnFullScreen.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent(ContenidoExperiencia.this, FullContenido.class);
+//                                intent.putExtra("ruta_contenido",urlcontenido);
+//                                intent.putExtra("tipo_contenido",tipocontenido);
+                                startActivity(intent);
+
+                            }
+                        });
+                    }
+                    ContenidoExpAdapter adapter = new ContenidoExpAdapter(listContenidoExp,ContenidoExperiencia.this);
+                    sliderContenido.setAdapter(adapter);
+                }
+                catch (Exception e){e.printStackTrace();}
+
+            }
+        },new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.i("Error Voley", error.toString());
+            }
+        });
+
+        requestQueue.add(jsonArrayRequest);
+
+
+    }
+    
+    
 
     private void hideSystemUI() {
         View decorView = getWindow().getDecorView();
@@ -131,91 +318,6 @@ public class ContenidoExperiencia extends AppCompatActivity {
         decorView.setSystemUiVisibility(uiOptions);
     }
 
-    private void consumirAPI() {
-
-//        String url = "https://restapi-production-575c.up.railway.app/api/contenidoExperienciaMovil?id_experiencia=5";
-
-
-        String id= id_experiencia;
-
-        String url = Utilidades.RUTA+ "contenidoExperienciaMovil?id_experiencia="+ id;
-
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONArray jsonArray = new JSONArray(response);
-                    JSONObject jsonObject = new JSONObject(jsonArray.getString(0));
-//                    int idexperiencia = jsonObject.getInt("idexperiencia");
-                    String titulo = jsonObject.getString("titulo");
-                    String subtitulo = jsonObject.getString("subtitulo");
-                    String parrafo = jsonObject.getString("parrafo");
-                    String tipocontenido = jsonObject.getString("tipo_contenido");
-                    String urlcontenido = jsonObject.getString("ruta_contenido");
-                    txtTitulo.setText(titulo);
-                    txtSubTitulo.setText(subtitulo);
-                    txtParrafo.setText(parrafo);
-
-
-                    switch (tipocontenido) {
-                        case "imagen360":
-                            webViewContenido.setVisibility(View.VISIBLE);
-                            webViewContenido.getSettings().setJavaScriptEnabled(true);
-                            webViewContenido.loadUrl(urlcontenido);
-
-                            break;
-
-
-
-                        case "video":
-                            youTubePlayerViewContenido.setVisibility(View.VISIBLE);
-                            getLifecycle().addObserver(youTubePlayerViewContenido);
-
-
-                            youTubePlayerViewContenido.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
-                                @Override
-                                public void onReady(YouTubePlayer youTubePlayer) {
-                                    String videoId = getYoutubeId(urlcontenido);
-                                    youTubePlayer.loadVideo(videoId, 0);
-                                    // Carga el video y lo reproduce automáticamente
-                                }
-                            });
-
-                            break;
-                        case "imagen":
-
-                            imageViewContenido.setVisibility(View.VISIBLE);
-                            Glide.with(ContenidoExperiencia.this).load(urlcontenido).into(imageViewContenido);
-
-                            break;
-                    }
-                    btnFullScreen.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent intent = new Intent(ContenidoExperiencia.this, FullContenido.class);
-                            intent.putExtra("ruta_contenido",urlcontenido);
-                            intent.putExtra("tipo_contenido",tipocontenido);
-                            startActivity(intent);
-
-                        }
-                    });
-
-
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-        requestQueue.add(stringRequest);
-    }
 
     private String getYoutubeId(String videoUrl) {
         String videoId = null;

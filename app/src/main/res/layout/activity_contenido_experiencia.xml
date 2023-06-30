@@ -20,7 +20,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_slider_contenido"
             android:layout_width="match_parent"
-            android:layout_height="480dp"
+            android:layout_height="520dp"
             android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@id/cardview_abajo"
             app:layout_constraintEnd_toEndOf="parent"
@@ -75,9 +75,8 @@
             app:layout_constraintBottom_toBottomOf="@id/rv_slider_contenido"
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
-
-
             />
+
         <androidx.cardview.widget.CardView
             android:id="@+id/cardview_abajo"
             android:layout_width="match_parent"
@@ -86,10 +85,23 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/rv_slider_contenido">
+            <ProgressBar
+                android:id="@+id/pbCantidadExperiencias"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:max="100"
+                android:layout_margin="4dp"
+                android:progress="10"
+                android:progressDrawable="@drawable/progress_bar_experiencias" />
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/white">
+                android:layout_marginTop="20dp"
+
+                >
                 <androidx.core.widget.NestedScrollView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
@@ -108,8 +120,9 @@
                             android:layout_marginEnd="20dp"
                             android:gravity="center_horizontal"
                             android:text="subtitulo"
-                            android:textColor="@color/white"
-                            android:textSize="25dp"></TextView>
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
+                            android:textSize="20dp"></TextView>
                         <ScrollView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
@@ -117,6 +130,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical">
+
 
                                 <TextView
                                     android:id="@+id/txtParrafoExperiencia"
@@ -129,8 +143,8 @@
                                     android:gravity="center_horizontal"
                                     android:text="parrafo resumen"
                                     android:textColor="@color/black"
-                                    android:textSize="20dp"
-                                    android:background="@drawable/borde"></TextView>
+                                    android:textSize="16dp"
+                                    ></TextView>
                             </LinearLayout>
                         </ScrollView>
 
