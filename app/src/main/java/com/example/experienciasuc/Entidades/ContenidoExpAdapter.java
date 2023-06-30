@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.experienciasuc.ContenidoExperiencia;
+import com.example.experienciasuc.FullContenido;
 import com.example.experienciasuc.MainActivity;
 import com.example.experienciasuc.R;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
@@ -61,16 +62,19 @@ public class ContenidoExpAdapter extends RecyclerView.Adapter<ContenidoExpAdapte
         holder.setTipocontenido(tipocontenido,urlcontenido);
 
 
-        // Remplazar boton Full
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                Intent intent = new Intent(view.getContext(), MainActivity.class);
-//
-//                view.getContext().startActivity(intent);
-//            }
-//        });
+//         Remplazar boton Full
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(view.getContext(), FullContenido.class);
+                intent.putExtra("ruta_contenido",urlcontenido);
+                intent.putExtra("tipo_contenido",tipocontenido);
+
+
+                view.getContext().startActivity(intent);
+            }
+        });
 
 
     }
