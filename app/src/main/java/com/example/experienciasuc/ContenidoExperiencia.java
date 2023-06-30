@@ -102,7 +102,7 @@ public class ContenidoExperiencia extends AppCompatActivity {
         txtParrafo = findViewById(R.id.txtParrafoExperiencia);
         txtParrafo.setMovementMethod(new ScrollingMovementMethod());
 
-        btnFullScreen = findViewById(R.id.full);
+
         btnvolver = findViewById(R.id.volverlistabotones);
 
         btnvolver.setOnClickListener(new View.OnClickListener() {
@@ -203,16 +203,7 @@ public class ContenidoExperiencia extends AppCompatActivity {
 
                         listContenidoExp.add(contenidoE);
 
-                        btnFullScreen.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Intent intent = new Intent(ContenidoExperiencia.this, FullContenido.class);
-//                                intent.putExtra("ruta_contenido",urlcontenido);
-//                                intent.putExtra("tipo_contenido",tipocontenido);
-                                startActivity(intent);
 
-                            }
-                        });
                     }
                     ContenidoExpAdapter adapter = new ContenidoExpAdapter(listContenidoExp,ContenidoExperiencia.this);
                     sliderContenido.setAdapter(adapter);
