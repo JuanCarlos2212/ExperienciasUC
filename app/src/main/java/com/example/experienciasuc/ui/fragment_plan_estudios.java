@@ -64,6 +64,11 @@ public class fragment_plan_estudios extends Fragment {
         String googleDocsUrl = "https://drive.google.com/viewerng/viewer?embedded=true&url=";
         webView.loadUrl(googleDocsUrl + planestudios);
 
+        // Habilitar gestos de zoom en el WebView
+        webSettings.setBuiltInZoomControls(true);
+        webSettings.setDisplayZoomControls(false);
+        webSettings.setSupportZoom(true);
+
         // Configurar WebViewClient para detectar cuando se ha terminado de cargar el PDF
         webView.setWebViewClient(new WebViewClient() {
             @Override

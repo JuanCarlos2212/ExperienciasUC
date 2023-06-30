@@ -25,6 +25,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.DecelerateInterpolator;
+import android.view.animation.LinearInterpolator;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -61,6 +63,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import UtilExperiencias.Utilidades;
+import android.animation.ObjectAnimator;
 
 
 public class ContenidoExperiencia extends AppCompatActivity {
@@ -145,8 +148,8 @@ public class ContenidoExperiencia extends AppCompatActivity {
                 // Aplica una interpolación lineal al progreso
                 float interpolatedProgress = Math.min(progress, 100);
 
-                // Actualiza la ProgressBar con el valor de progreso interpolado
-                pbCantidadExperiencias.setProgress((int) interpolatedProgress);
+                // Aplica una animación de crecimiento o decrecimiento suave a la ProgressBar
+                animateProgressBar(pbCantidadExperiencias, (int) interpolatedProgress);
             }
         });
 
@@ -167,7 +170,26 @@ public class ContenidoExperiencia extends AppCompatActivity {
         cargarContenidocomoTal();
         cargarTextosContenido();
     }
+    private void animateProgressBar(ProgressBar progressBar, int targetProgress) {
+        // Crea una animación de progreso
+        ObjectAnimator progressAnimator = ObjectAnimator.ofInt(progressBar, "progress", progressBar.getProgress(), targetProgress);
+        progressAnimator.setDuration(500); // Duración de la animación en milisegundos
+        progressAnimator.setInterpolator(new DecelerateInterpolator()); // Interpolador para una animación suave
+        progressAnimator.start(); // Inicia la animación
+    }
 
+    private void applyGradientToTextView(TextView textView, int colorInicio, int colorMedio, int colorFin) {
+        // Crea un objeto LinearGradient para definir el degradado de colores
+        LinearGradient gradient = new LinearGradient(
+                0, 0, textView.getPaint().measureText(textView.getText().toString()), 0,
+                new int[]{colorInicio, colorMedio, colorFin},
+                null,
+                Shader.TileMode.CLAMP
+        );
+
+        // Aplica el LinearGradient al Shader del TextView
+        textView.getPaint().setShader(gradient);
+    }
 
     private void cargarContenidocomoTal() {
 
