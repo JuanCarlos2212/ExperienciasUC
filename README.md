@@ -1,5 +1,4 @@
 # ExperienciasUC
-**Título de la Presentación: Explorando Experiencias UC: Un Viaje Virtual al Futuro Universitario**
 
 **Introducción:**
 - Bienvenidos a la presentación de nuestro proyecto universitario: **"Experiencias UC"**.
